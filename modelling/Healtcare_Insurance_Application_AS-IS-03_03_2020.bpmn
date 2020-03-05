@@ -102,6 +102,10 @@
     <bpmn:sequenceFlow id="SequenceFlow_00ynkef" sourceRef="Task_0pioyfk" targetRef="ExclusiveGateway_0y55zvj" />
     <bpmn:sequenceFlow id="SequenceFlow_0vo1906" sourceRef="Task_10hr96o" targetRef="Task_1rjgcif" />
     <bpmn:sequenceFlow id="SequenceFlow_0r1uvb2" sourceRef="Task_1rjgcif" targetRef="EndEvent_1203m3q" />
+    <bpmn:textAnnotation id="TextAnnotation_0np8gfs">
+      <bpmn:text>We have to add a insurance recommendation process</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0rib5r0" sourceRef="Task_04sst3a" targetRef="TextAnnotation_0np8gfs" />
   </bpmn:process>
   <bpmn:process id="Process_0nkv4ay" isExecutable="false">
     <bpmn:receiveTask id="Task_0sv3tg3" name="Customer-Chat-Support is informed">
@@ -384,6 +388,13 @@
           <dc:Bounds x="1188" y="775" width="84" height="53" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0np8gfs_di" bpmnElement="TextAnnotation_0np8gfs">
+        <dc:Bounds x="330" y="130" width="100.00000762939453" height="69" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0rib5r0_di" bpmnElement="Association_0rib5r0">
+        <di:waypoint x="338" y="265" />
+        <di:waypoint x="366" y="199" />
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
