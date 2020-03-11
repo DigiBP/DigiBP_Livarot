@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0nvhlg5" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.6.0">
-  <bpmn:process id="HealthcareInsuanceApplication_AS-IS_Basic-20200311" name="AS-IS-Basic-11_03_2020" isExecutable="true" camunda:candidateStarterGroups="engineer">
+  <bpmn:process id="HealthcareInsuanceApplication_AS-IS_Basic" name="AS-IS-Basic" isExecutable="true" camunda:candidateStarterGroups="engineer" camunda:versionTag="1.4">
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>SequenceFlow_1oha3no</bpmn:outgoing>
     </bpmn:startEvent>
@@ -33,7 +33,7 @@
     <bpmn:userTask id="Task_1mz8wtm" name="Check fo missing information">
       <bpmn:extensionElements>
         <camunda:formData>
-          <camunda:formField id="information_missing" label="Information missing?" type="boolean" />
+          <camunda:formField id="information_missing" label="Any information missing?" type="boolean" />
           <camunda:formField id="insurance_type" label="Is the insurance-type filled out?" type="string" />
           <camunda:formField id="familyname" label="Is the familyname filled out?" type="string" />
           <camunda:formField id="personal_name" label="Is the name filled out?" type="string" />
@@ -132,6 +132,15 @@
       <bpmn:outgoing>SequenceFlow_1kb4km4</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:userTask id="Task_0vcca5t" name="Fill out missing information">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="insurance_type" label="Name the insurance-Type you want:" type="string" />
+          <camunda:formField id="familyname" label="Your familyname:" type="string" />
+          <camunda:formField id="personal_name" label="Your name:" type="string" />
+          <camunda:formField id="age" label="Your age:" type="string" />
+          <camunda:formField id="existing_conditions" label="Do you have any conditions? (separate by comma)" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1kb4km4</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1ip9c4c</bpmn:outgoing>
     </bpmn:userTask>
@@ -202,10 +211,6 @@
       <bpmn:incoming>SequenceFlow_1g24hqe</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1rzv371</bpmn:outgoing>
     </bpmn:manualTask>
-    <bpmn:manualTask id="Task_153vofn" name="Sign and send papers back">
-      <bpmn:incoming>SequenceFlow_1rzv371</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_14tx514</bpmn:outgoing>
-    </bpmn:manualTask>
     <bpmn:sequenceFlow id="SequenceFlow_14tx514" sourceRef="Task_153vofn" targetRef="Task_0aaocow" />
     <bpmn:sequenceFlow id="SequenceFlow_1foa6fu" sourceRef="Task_0aaocow" targetRef="Task_187crdu" />
     <bpmn:endEvent id="EndEvent_14c1n46">
@@ -225,18 +230,32 @@
       <bpmn:incoming>SequenceFlow_14tx514</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1foa6fu</bpmn:outgoing>
     </bpmn:manualTask>
-    <bpmn:manualTask id="Task_187crdu" name="Sign and send copy to customer">
+    <bpmn:userTask id="Task_153vofn" name="Sign and send papers back">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="customer_signature" label="Please sign your contract with this checkbox:" type="boolean" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1rzv371</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_14tx514</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Task_187crdu" name="Sign and send copy to customer">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="consultant_signature" label="Please sign the contract with this checkbox:" type="boolean" />
+        </camunda:formData>
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1foa6fu</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_04ynrb4</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_0mta7ff</bpmn:outgoing>
-    </bpmn:manualTask>
+    </bpmn:userTask>
     <bpmn:textAnnotation id="TextAnnotation_0ctcbu6">
       <bpmn:text>This process was created by the DigiBP_Livarot Spring 2020 Group</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_0flk5fq" sourceRef="StartEvent_1" targetRef="TextAnnotation_0ctcbu6" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="HealthcareInsuanceApplication_AS-IS_Basic-20200311">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="HealthcareInsuanceApplication_AS-IS_Basic">
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="179" y="259" width="36" height="36" />
       </bpmndi:BPMNShape>
@@ -450,9 +469,6 @@
       <bpmndi:BPMNShape id="ManualTask_1odsdp7_di" bpmnElement="Task_0o0bmmx">
         <dc:Bounds x="2010" y="237" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="ManualTask_1wrf3hh_di" bpmnElement="Task_153vofn">
-        <dc:Bounds x="2160" y="237" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_14tx514_di" bpmnElement="SequenceFlow_14tx514">
         <di:waypoint x="2210" y="317" />
         <di:waypoint x="2210" y="850" />
@@ -485,9 +501,6 @@
       <bpmndi:BPMNShape id="ManualTask_0xulpox_di" bpmnElement="Task_0aaocow">
         <dc:Bounds x="2160" y="850" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="ManualTask_1lhg3oc_di" bpmnElement="Task_187crdu">
-        <dc:Bounds x="2320" y="850" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_0ctcbu6_di" bpmnElement="TextAnnotation_0ctcbu6">
         <dc:Bounds x="260" y="80" width="126.00000762939453" height="84" />
       </bpmndi:BPMNShape>
@@ -495,6 +508,12 @@
         <di:waypoint x="208" y="263" />
         <di:waypoint x="289" y="164" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_0f5pb2w_di" bpmnElement="Task_153vofn">
+        <dc:Bounds x="2160" y="237" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_0ae7ghf_di" bpmnElement="Task_187crdu">
+        <dc:Bounds x="2320" y="850" width="100" height="80" />
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
