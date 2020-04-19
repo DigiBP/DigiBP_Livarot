@@ -7,7 +7,7 @@
     <bpmn:messageFlow id="MessageFlow_0ooubgw" sourceRef="Task_1mahzrl" targetRef="IntermediateThrowEvent_0hf05u0" />
     <bpmn:messageFlow id="MessageFlow_0t9lgvv" sourceRef="Task_0uwy313" targetRef="IntermediateThrowEvent_0hf05u0" />
   </bpmn:collaboration>
-  <bpmn:process id="BPMN-Pool2-Basis-Testporzess" name="BPMN-Pool2-Basis-Testporozess" isExecutable="true" camunda:candidateStarterGroups="engineer" camunda:versionTag="1.4">
+  <bpmn:process id="BPMN-Pool2-Basis-Testporzess" name="BPMN-Pool2-Basis-Testprozess" isExecutable="true" camunda:candidateStarterGroups="engineer" camunda:versionTag="1.4">
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:extensionElements>
         <camunda:formData businessKey="businessKey">
@@ -148,7 +148,7 @@
     <bpmn:dataObjectReference id="DataObjectReference_0vh0xtu" name="Case Key" dataObjectRef="DataObject_1fgfqa7" />
     <bpmn:dataObject id="DataObject_1fgfqa7" />
   </bpmn:process>
-  <bpmn:message id="Message_1om58pw" name="Message_To_Consultant_Step_1" />
+  <bpmn:message id="Message_1om58pw" name="Message_To_B" />
   <bpmn:message id="Message_08vszia" name="Message_To_Applicant_Step_2" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1bts0xx">
