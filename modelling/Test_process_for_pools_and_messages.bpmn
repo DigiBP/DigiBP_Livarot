@@ -16,7 +16,7 @@
       </bpmn:extensionElements>
       <bpmn:outgoing>SequenceFlow_1k536m0</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:sendTask id="Task_08iysbk" name="Send message" camunda:expression="${runtimeService.createMessageCorrelation(&#34;Message_To_B&#34;).processInstanceBusinessKey(execution.getBusinessKey()).setVariables(execution.getVariables()).correlate()}">
+    <bpmn:sendTask id="Task_08iysbk" name="Send message" camunda:expression="${runtimeService.createMessageCorrelation(&#34;Message_To_Consultant_Step_1&#34;).processInstanceBusinessKey(execution.getBusinessKey()).setVariables(execution.getVariables()).correlate()}">
       <bpmn:incoming>SequenceFlow_1d4ndvw</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_06v6mm4</bpmn:outgoing>
       <bpmn:property id="Property_0hwjwta" name="__targetRef_placeholder" />

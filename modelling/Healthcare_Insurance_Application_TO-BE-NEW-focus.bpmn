@@ -190,6 +190,11 @@
   </bpmn:process>
   <bpmn:process id="Process_Application1" name="Application-Test1" isExecutable="false" camunda:candidateStarterGroups="engineer" camunda:versionTag="2.0">
     <bpmn:startEvent id="StartEvent_1">
+      <bpmn:extensionElements>
+        <camunda:formData businessKey="businessKey">
+          <camunda:formField id="businessKey" label="Business Key" type="string" defaultValue="${strongUuidGenerator.getNextId()}" />
+        </camunda:formData>
+      </bpmn:extensionElements>
       <bpmn:outgoing>SequenceFlow_1v6s4vr</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:userTask id="Task_0m7kb31" name="Find and Fill out Insurance Application" camunda:candidateGroups="engineer">
