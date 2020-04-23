@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0nvhlg5" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.6.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0nvhlg5" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.5.0">
   <bpmn:collaboration id="Collaboration_Insurance-Application">
     <bpmn:participant id="Participant_09boxaq" name="Insurance" processRef="Process_Insurance-AS_IS" />
     <bpmn:participant id="Participant_1ga5h04" processRef="Process_Application-AS_IS" />
     <bpmn:messageFlow id="MessageFlow_1h2ynhq" sourceRef="Task_07mna3f" targetRef="StartEvent_10abg84" />
     <bpmn:messageFlow id="MessageFlow_13ummn9" sourceRef="Task_1tzg5l7" targetRef="IntermediateThrowEvent_1wupwxk" />
     <bpmn:messageFlow id="MessageFlow_193nzpi" sourceRef="Task_1q9qvd3" targetRef="IntermediateThrowEvent_1wupwxk" />
-    <bpmn:messageFlow id="MessageFlow_1ftecq0" sourceRef="Task_0rmevfz" targetRef="Task_08row2d" />
     <bpmn:messageFlow id="MessageFlow_12qw6mf" sourceRef="Task_0aastz6" targetRef="IntermediateThrowEvent_07sz8rf" />
     <bpmn:messageFlow id="MessageFlow_0tlc2s1" sourceRef="Task_071br12" targetRef="IntermediateThrowEvent_07sz8rf" />
     <bpmn:messageFlow id="MessageFlow_029n9uj" sourceRef="IntermediateThrowEvent_0qxdnab" targetRef="IntermediateThrowEvent_1yrkgqh" />
     <bpmn:messageFlow id="MessageFlow_1m9727j" sourceRef="IntermediateThrowEvent_1gqs6yf" targetRef="IntermediateThrowEvent_0y03gm5" />
+    <bpmn:messageFlow id="MessageFlow_1l162h1" sourceRef="Task_0p6n6t0" targetRef="IntermediateThrowEvent_1wupwxk" />
+    <bpmn:messageFlow id="MessageFlow_10hxa5l" sourceRef="Task_0rmevfz" targetRef="IntermediateThrowEvent_0fsftc1" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_Insurance-AS_IS" isExecutable="false" camunda:versionTag="1.2">
+  <bpmn:process id="Process_Insurance-AS_IS" isExecutable="true" camunda:versionTag="1.2">
     <bpmn:laneSet id="LaneSet_02z0z8s">
       <bpmn:lane id="Lane_0s0l6ul" name="Consultant">
         <bpmn:flowNodeRef>StartEvent_10abg84</bpmn:flowNodeRef>
@@ -36,6 +37,7 @@
         <bpmn:flowNodeRef>Task_1ahua0n</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_1b1p2cv</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_0rmevfz</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_0p6n6t0</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
     <bpmn:startEvent id="StartEvent_10abg84">
@@ -99,8 +101,8 @@
       <bpmn:messageEventDefinition id="MessageEventDefinition_0lduhao" />
     </bpmn:intermediateCatchEvent>
     <bpmn:exclusiveGateway id="ExclusiveGateway_10twgh1">
-      <bpmn:incoming>SequenceFlow_1cgmb29</bpmn:incoming>
       <bpmn:incoming>SequenceFlow_1sz64xj</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0akiu0v</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0dahvax</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:exclusiveGateway id="ExclusiveGateway_1biy8jc" name="Offer accepted?">
@@ -129,7 +131,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_1y4nc79" name="Rejected" sourceRef="ExclusiveGateway_1t60xmu" targetRef="Task_1tzg5l7">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${assesment_decision == "rejected"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_1cgmb29" name="Accepted" sourceRef="ExclusiveGateway_1t60xmu" targetRef="ExclusiveGateway_10twgh1">
+    <bpmn:sequenceFlow id="SequenceFlow_1cgmb29" name="Accepted" sourceRef="ExclusiveGateway_1t60xmu" targetRef="Task_0p6n6t0">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${assesment_decision == "accepted"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0rpj2ap" sourceRef="Task_0t7hdkx" targetRef="Task_1q9qvd3" />
@@ -192,6 +194,11 @@
       <bpmn:incoming>SequenceFlow_10osr7s</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1g4flb8</bpmn:outgoing>
     </bpmn:task>
+    <bpmn:task id="Task_0p6n6t0" name="Inform about about acceptance">
+      <bpmn:incoming>SequenceFlow_1cgmb29</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0akiu0v</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_0akiu0v" sourceRef="Task_0p6n6t0" targetRef="ExclusiveGateway_10twgh1" />
   </bpmn:process>
   <bpmn:process id="Process_Application-AS_IS" isExecutable="false" camunda:versionTag="1.2">
     <bpmn:startEvent id="StartEvent_1">
@@ -279,9 +286,9 @@
       <bpmn:outgoing>SequenceFlow_0j7kheg</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:exclusiveGateway id="ExclusiveGateway_0dev8fk">
-      <bpmn:incoming>SequenceFlow_13fuyfk</bpmn:incoming>
       <bpmn:incoming>SequenceFlow_15nng5m</bpmn:incoming>
       <bpmn:incoming>SequenceFlow_0n0o1fj</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0j0n8ej</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_17w5uk0</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:endEvent id="EndEvent_0j2tmof">
@@ -292,8 +299,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_0n0o1fj" sourceRef="Task_057qtii" targetRef="ExclusiveGateway_0dev8fk" />
     <bpmn:sequenceFlow id="SequenceFlow_1brpvpv" name="Alternative offer" sourceRef="ExclusiveGateway_0ga2153" targetRef="Task_1t4uybr" />
     <bpmn:sequenceFlow id="SequenceFlow_19999dc" sourceRef="Task_1t4uybr" targetRef="IntermediateThrowEvent_0qxdnab" />
-    <bpmn:sequenceFlow id="SequenceFlow_0j7kheg" sourceRef="ExclusiveGateway_1t4rv75" targetRef="Task_08row2d" />
-    <bpmn:sequenceFlow id="SequenceFlow_13fuyfk" sourceRef="Task_08row2d" targetRef="ExclusiveGateway_0dev8fk" />
+    <bpmn:sequenceFlow id="SequenceFlow_0j7kheg" sourceRef="ExclusiveGateway_1t4rv75" targetRef="IntermediateThrowEvent_0fsftc1" />
     <bpmn:sequenceFlow id="SequenceFlow_152mt5s" sourceRef="IntermediateThrowEvent_1wupwxk" targetRef="ExclusiveGateway_0ga2153" />
     <bpmn:sequenceFlow id="SequenceFlow_06yn7ao" name="Application accepted" sourceRef="ExclusiveGateway_0ga2153" targetRef="ExclusiveGateway_1t4rv75" />
     <bpmn:sequenceFlow id="SequenceFlow_0en73si" sourceRef="IntermediateThrowEvent_0qxdnab" targetRef="ExclusiveGateway_1xq6ak6" />
@@ -327,10 +333,12 @@
       <bpmn:incoming>SequenceFlow_17fod1s</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1kb4km4</bpmn:outgoing>
     </bpmn:task>
-    <bpmn:task id="Task_08row2d" name="Contract received">
+    <bpmn:sequenceFlow id="SequenceFlow_0j0n8ej" sourceRef="IntermediateThrowEvent_0fsftc1" targetRef="ExclusiveGateway_0dev8fk" />
+    <bpmn:intermediateCatchEvent id="IntermediateThrowEvent_0fsftc1" name="Contract received">
       <bpmn:incoming>SequenceFlow_0j7kheg</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_13fuyfk</bpmn:outgoing>
-    </bpmn:task>
+      <bpmn:outgoing>SequenceFlow_0j0n8ej</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0iffhlc" />
+    </bpmn:intermediateCatchEvent>
     <bpmn:textAnnotation id="TextAnnotation_0ctcbu6">
       <bpmn:text>This process was created by the DigiBP_Livarot Spring 2020 Group</bpmn:text>
     </bpmn:textAnnotation>
@@ -455,10 +463,6 @@
         <di:waypoint x="1100" y="610" />
         <di:waypoint x="1100" y="510" />
         <di:waypoint x="1072" y="474" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="MessageFlow_1ftecq0_di" bpmnElement="MessageFlow_1ftecq0">
-        <di:waypoint x="1960" y="1020" />
-        <di:waypoint x="1960" y="500" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Participant_1ga5h04_di" bpmnElement="Participant_1ga5h04" isHorizontal="true">
         <dc:Bounds x="129" y="80" width="2319" height="480" />
@@ -591,10 +595,10 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1cgmb29_di" bpmnElement="SequenceFlow_1cgmb29">
         <di:waypoint x="1170" y="965" />
-        <di:waypoint x="1170" y="1060" />
-        <di:waypoint x="1675" y="1060" />
+        <di:waypoint x="1170" y="1050" />
+        <di:waypoint x="1330" y="1050" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1217" y="1043" width="45" height="14" />
+          <dc:Bounds x="1170" y="1033" width="45" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0dahvax_di" bpmnElement="SequenceFlow_0dahvax">
@@ -647,7 +651,7 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0j7kheg_di" bpmnElement="SequenceFlow_0j7kheg">
         <di:waypoint x="1815" y="460" />
-        <di:waypoint x="1910" y="460" />
+        <di:waypoint x="1962" y="460" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ExclusiveGateway_1w40jbv_di" bpmnElement="ExclusiveGateway_1w40jbv" isMarkerVisible="true">
         <dc:Bounds x="2055" y="915" width="50" height="50" />
@@ -676,10 +680,6 @@
       <bpmndi:BPMNShape id="ExclusiveGateway_0dev8fk_di" bpmnElement="ExclusiveGateway_0dev8fk" isMarkerVisible="true">
         <dc:Bounds x="2145" y="435" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_13fuyfk_di" bpmnElement="SequenceFlow_13fuyfk">
-        <di:waypoint x="2010" y="460" />
-        <di:waypoint x="2145" y="460" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="EndEvent_0j2tmof_di" bpmnElement="EndEvent_0j2tmof">
         <dc:Bounds x="2312" y="442" width="36" height="36" />
       </bpmndi:BPMNShape>
@@ -763,9 +763,6 @@
       <bpmndi:BPMNShape id="Task_0ntvdc8_di" bpmnElement="Task_1tzg5l7">
         <dc:Bounds x="1310" y="790" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_0zb8yre_di" bpmnElement="Task_08row2d">
-        <dc:Bounds x="1910" y="420" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_1w475dc_di" bpmnElement="Task_1q9qvd3">
         <dc:Bounds x="1450" y="900" width="100" height="80" />
       </bpmndi:BPMNShape>
@@ -778,6 +775,35 @@
       <bpmndi:BPMNShape id="Task_10ohxoq_di" bpmnElement="Task_0rmevfz">
         <dc:Bounds x="1910" y="1020" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_0p6n6t0_di" bpmnElement="Task_0p6n6t0">
+        <dc:Bounds x="1330" y="1010" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0akiu0v_di" bpmnElement="SequenceFlow_0akiu0v">
+        <di:waypoint x="1430" y="1050" />
+        <di:waypoint x="1553" y="1050" />
+        <di:waypoint x="1553" y="1060" />
+        <di:waypoint x="1675" y="1060" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_1l162h1_di" bpmnElement="MessageFlow_1l162h1">
+        <di:waypoint x="1380" y="1090" />
+        <di:waypoint x="1380" y="1100" />
+        <di:waypoint x="1060" y="1100" />
+        <di:waypoint x="1060" y="478" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0j0n8ej_di" bpmnElement="SequenceFlow_0j0n8ej">
+        <di:waypoint x="1998" y="460" />
+        <di:waypoint x="2145" y="460" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="IntermediateCatchEvent_19bp8kq_di" bpmnElement="IntermediateThrowEvent_0fsftc1">
+        <dc:Bounds x="1962" y="442" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1936" y="418" width="87" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="MessageFlow_10hxa5l_di" bpmnElement="MessageFlow_10hxa5l">
+        <di:waypoint x="1980" y="1020" />
+        <di:waypoint x="1980" y="478" />
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
