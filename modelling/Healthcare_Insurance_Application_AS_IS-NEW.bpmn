@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0nvhlg5" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.6.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" id="Definitions_0nvhlg5" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.6.0">
   <bpmn:collaboration id="Collaboration_Insurance-Application">
     <bpmn:participant id="Participant_09boxaq" name="Insurance" processRef="Process_Insurance-AS_IS" />
     <bpmn:participant id="Participant_1ga5h04" processRef="Process_Application-AS_IS" />
@@ -437,33 +437,33 @@
       <bpmndi:BPMNShape id="Lane_0s0l6ul_di" bpmnElement="Lane_0s0l6ul" isHorizontal="true">
         <dc:Bounds x="152" y="650" width="2298" height="520" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="MessageFlow_1h2ynhq_di" bpmnElement="MessageFlow_1h2ynhq">
+      <bpmndi:BPMNEdge id="MessageFlow_1h2ynhq_di" bpmnElement="MessageFlow_1h2ynhq" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <di:waypoint x="460" y="387" />
         <di:waypoint x="460" y="600" />
         <di:waypoint x="220" y="600" />
         <di:waypoint x="220" y="812" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="MessageFlow_13ummn9_di" bpmnElement="MessageFlow_13ummn9">
+      <bpmndi:BPMNEdge id="MessageFlow_13ummn9_di" bpmnElement="MessageFlow_13ummn9" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <di:waypoint x="1360" y="790" />
         <di:waypoint x="1360" y="634" />
         <di:waypoint x="1060" y="634" />
         <di:waypoint x="1060" y="478" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="MessageFlow_193nzpi_di" bpmnElement="MessageFlow_193nzpi">
+      <bpmndi:BPMNEdge id="MessageFlow_193nzpi_di" bpmnElement="MessageFlow_193nzpi" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <di:waypoint x="1500" y="900" />
         <di:waypoint x="1500" y="610" />
         <di:waypoint x="1100" y="610" />
         <di:waypoint x="1100" y="510" />
         <di:waypoint x="1072" y="474" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="MessageFlow_1ftecq0_di" bpmnElement="MessageFlow_1ftecq0">
+      <bpmndi:BPMNEdge id="MessageFlow_1ftecq0_di" bpmnElement="MessageFlow_1ftecq0" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <di:waypoint x="1960" y="1020" />
         <di:waypoint x="1960" y="500" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Participant_1ga5h04_di" bpmnElement="Participant_1ga5h04" isHorizontal="true">
         <dc:Bounds x="129" y="80" width="2319" height="480" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="StartEvent_1tgdqnp_di" bpmnElement="StartEvent_10abg84">
+      <bpmndi:BPMNShape id="StartEvent_1tgdqnp_di" bpmnElement="StartEvent_10abg84" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <dc:Bounds x="202" y="812" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0ap3p39_di" bpmnElement="SequenceFlow_0ap3p39">
@@ -478,17 +478,17 @@
         <di:waypoint x="510" y="347" />
         <di:waypoint x="575" y="347" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="IntermediateCatchEvent_14csca6_di" bpmnElement="IntermediateThrowEvent_07sz8rf">
+      <bpmndi:BPMNShape id="IntermediateCatchEvent_14csca6_di" bpmnElement="IntermediateThrowEvent_07sz8rf" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <dc:Bounds x="672" y="329" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="MessageFlow_12qw6mf_di" bpmnElement="MessageFlow_12qw6mf">
+      <bpmndi:BPMNEdge id="MessageFlow_12qw6mf_di" bpmnElement="MessageFlow_12qw6mf" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <di:waypoint x="828" y="790" />
         <di:waypoint x="828" y="530" />
         <di:waypoint x="740" y="530" />
         <di:waypoint x="740" y="410" />
         <di:waypoint x="701" y="361" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="MessageFlow_0tlc2s1_di" bpmnElement="MessageFlow_0tlc2s1">
+      <bpmndi:BPMNEdge id="MessageFlow_0tlc2s1_di" bpmnElement="MessageFlow_0tlc2s1" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <di:waypoint x="800" y="910" />
         <di:waypoint x="770" y="870" />
         <di:waypoint x="770" y="600" />
@@ -520,7 +520,7 @@
           <dc:Bounds x="808" y="413" width="15" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="IntermediateCatchEvent_132j0ob_di" bpmnElement="IntermediateThrowEvent_1wupwxk">
+      <bpmndi:BPMNShape id="IntermediateCatchEvent_132j0ob_di" bpmnElement="IntermediateThrowEvent_1wupwxk" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <dc:Bounds x="1042" y="442" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ExclusiveGateway_0ga2153_di" bpmnElement="ExclusiveGateway_0ga2153" isMarkerVisible="true">
@@ -544,7 +544,7 @@
         <di:waypoint x="1550" y="940" />
         <di:waypoint x="1592" y="940" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="IntermediateCatchEvent_1x165s4_di" bpmnElement="IntermediateThrowEvent_1yrkgqh">
+      <bpmndi:BPMNShape id="IntermediateCatchEvent_1x165s4_di" bpmnElement="IntermediateThrowEvent_1yrkgqh" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <dc:Bounds x="1592" y="922" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1brpvpv_di" bpmnElement="SequenceFlow_1brpvpv">
@@ -560,10 +560,10 @@
         <di:waypoint x="1600" y="310" />
         <di:waypoint x="1662" y="310" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="IntermediateThrowEvent_0xb56vp_di" bpmnElement="IntermediateThrowEvent_0qxdnab">
+      <bpmndi:BPMNShape id="IntermediateThrowEvent_0xb56vp_di" bpmnElement="IntermediateThrowEvent_0qxdnab" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <dc:Bounds x="1662" y="292" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="MessageFlow_029n9uj_di" bpmnElement="MessageFlow_029n9uj">
+      <bpmndi:BPMNEdge id="MessageFlow_029n9uj_di" bpmnElement="MessageFlow_029n9uj" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <di:waypoint x="1680" y="328" />
         <di:waypoint x="1680" y="625" />
         <di:waypoint x="1610" y="625" />
@@ -723,17 +723,17 @@
         <di:waypoint x="900" y="830" />
         <di:waypoint x="962" y="830" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="IntermediateCatchEvent_1xv9r14_di" bpmnElement="IntermediateThrowEvent_0y03gm5">
+      <bpmndi:BPMNShape id="IntermediateCatchEvent_1xv9r14_di" bpmnElement="IntermediateThrowEvent_0y03gm5" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <dc:Bounds x="962" y="812" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1izpihd_di" bpmnElement="SequenceFlow_1izpihd">
         <di:waypoint x="1140" y="347" />
         <di:waypoint x="1192" y="347" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="IntermediateThrowEvent_0u8nnxz_di" bpmnElement="IntermediateThrowEvent_1gqs6yf">
+      <bpmndi:BPMNShape id="IntermediateThrowEvent_0u8nnxz_di" bpmnElement="IntermediateThrowEvent_1gqs6yf" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <dc:Bounds x="1192" y="329" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="MessageFlow_1m9727j_di" bpmnElement="MessageFlow_1m9727j">
+      <bpmndi:BPMNEdge id="MessageFlow_1m9727j_di" bpmnElement="MessageFlow_1m9727j" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <di:waypoint x="1204" y="364" />
         <di:waypoint x="1150" y="520" />
         <di:waypoint x="1150" y="730" />
@@ -745,28 +745,28 @@
         <di:waypoint x="450" y="710" />
         <di:waypoint x="450" y="805" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Task_0yfcgbs_di" bpmnElement="Task_07mna3f">
+      <bpmndi:BPMNShape id="Task_0yfcgbs_di" bpmnElement="Task_07mna3f" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <dc:Bounds x="410" y="307" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_0er04ix_di" bpmnElement="Task_1w7w86i">
         <dc:Bounds x="280" y="790" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_0t2i5i5_di" bpmnElement="Task_0aastz6">
+      <bpmndi:BPMNShape id="Task_0t2i5i5_di" bpmnElement="Task_0aastz6" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <dc:Bounds x="800" y="790" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_0v5t4la_di" bpmnElement="Task_071br12">
+      <bpmndi:BPMNShape id="Task_0v5t4la_di" bpmnElement="Task_071br12" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <dc:Bounds x="800" y="900" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_17v770w_di" bpmnElement="Task_01tnudu">
         <dc:Bounds x="890" y="307" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_0ntvdc8_di" bpmnElement="Task_1tzg5l7">
+      <bpmndi:BPMNShape id="Task_0ntvdc8_di" bpmnElement="Task_1tzg5l7" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <dc:Bounds x="1310" y="790" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_0zb8yre_di" bpmnElement="Task_08row2d">
+      <bpmndi:BPMNShape id="Task_0zb8yre_di" bpmnElement="Task_08row2d" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <dc:Bounds x="1910" y="420" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_1w475dc_di" bpmnElement="Task_1q9qvd3">
+      <bpmndi:BPMNShape id="Task_1w475dc_di" bpmnElement="Task_1q9qvd3" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <dc:Bounds x="1450" y="900" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_00e92f8_di" bpmnElement="Task_1ahua0n">
@@ -775,7 +775,7 @@
       <bpmndi:BPMNShape id="Task_1weguky_di" bpmnElement="Task_1b1p2cv">
         <dc:Bounds x="1780" y="900" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_10ohxoq_di" bpmnElement="Task_0rmevfz">
+      <bpmndi:BPMNShape id="Task_10ohxoq_di" bpmnElement="Task_0rmevfz" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <dc:Bounds x="1910" y="1020" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
