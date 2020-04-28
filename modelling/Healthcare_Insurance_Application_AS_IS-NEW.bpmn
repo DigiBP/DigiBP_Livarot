@@ -219,6 +219,59 @@ Everything is done manually. By hand, in the office (customer goes to the consul
     </bpmn:textAnnotation>
     <bpmn:association id="Association_1y6pof5" sourceRef="Task_1w7w86i" targetRef="TextAnnotation_1no3kmk" />
     <bpmn:association id="Association_0tzj74y" sourceRef="Task_1mz8wtm" targetRef="TextAnnotation_012i5lh" />
+    <bpmn:textAnnotation id="TextAnnotation_1gcthz5">
+      <bpmn:text>Painpoint:
+Requesting missing information takes time and is tiresome</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_11acyxz" sourceRef="Task_0aastz6" targetRef="TextAnnotation_1gcthz5" />
+    <bpmn:textAnnotation id="TextAnnotation_0fx8p38">
+      <bpmn:text>Painpoint:
+Informing customer manuelly takes time - depending on the workload, this is unnecessary waste of worktime</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_14yhqfd" sourceRef="Task_071br12" targetRef="TextAnnotation_0fx8p38" />
+    <bpmn:textAnnotation id="TextAnnotation_1xynjiv">
+      <bpmn:text>Painpoint:
+1) The consulltant always needs to be up to date about the policy
+2) Humans can make errors
+3) Humans can only take so many inputs/variables into account at once (assesment further prone to error)</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0dcpqfa" sourceRef="Task_11lmnpe" targetRef="TextAnnotation_1xynjiv" />
+    <bpmn:textAnnotation id="TextAnnotation_07aoazu">
+      <bpmn:text>Painpoint:
+Informing customer manuelly takes time - depending on the workload, this is unnecessary waste of worktime</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0abxgpn" sourceRef="Task_0p6n6t0" targetRef="TextAnnotation_07aoazu" />
+    <bpmn:textAnnotation id="TextAnnotation_16ztisl">
+      <bpmn:text>Painpoint:
+Informing customer manuelly takes time - depending on the workload, this is unnecessary waste of worktime
+Also: Potentially angry customer has to be faced</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0ih10sf" sourceRef="Task_1tzg5l7" targetRef="TextAnnotation_16ztisl" />
+    <bpmn:textAnnotation id="TextAnnotation_18qsixx">
+      <bpmn:text>Painpoint:
+1) It takes time to create an alternative offer. We don't know much about the interests of our customer. Does he/she like to travel? This could mean they need travel-insurance on top of it
+2) Consultant and Customer need to find a date to meet up to discuss it</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_09g3kpj" sourceRef="Task_0t7hdkx" targetRef="TextAnnotation_18qsixx" />
+    <bpmn:textAnnotation id="TextAnnotation_13ocizh">
+      <bpmn:text>Painpoint:
+Needs to be done by hand.
+We can't keep track of it, when we print it out It leaves the system "forever"
+[Keyword: Medienbruch]</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0trpkz7" sourceRef="Task_1ahua0n" targetRef="TextAnnotation_13ocizh" />
+    <bpmn:textAnnotation id="TextAnnotation_0m41xwg">
+      <bpmn:text>Painpoint:
+1) Informing customer manuelly takes time - depending on the workload, this is unnecessary waste of worktime
+2) It might be difficult to get contracts with signatures</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0gezvao" sourceRef="Task_0rmevfz" targetRef="TextAnnotation_0m41xwg" />
+    <bpmn:textAnnotation id="TextAnnotation_1o8bnxl">
+      <bpmn:text>Painpoint:
+We lose our customers here. We can't remember which customers we had, if we don't keep track of them on paper. Further: We can't do marketing, since we have no automated way to contact them all and no easy access to our customer-files</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1d0oib0" sourceRef="EndEvent_135ck5v" targetRef="TextAnnotation_1o8bnxl" />
+    <bpmn:association id="Association_02jboeh" sourceRef="Task_1q9qvd3" targetRef="TextAnnotation_18qsixx" />
   </bpmn:process>
   <bpmn:process id="Process_Application-AS_IS" isExecutable="true" camunda:versionTag="1.3">
     <bpmn:userTask id="Task_0m7kb31" name="Find and Fill out Insurance Application" camunda:candidateGroups="engineer">
@@ -392,6 +445,25 @@ Everything is done manually. By hand, in the office (customer goes to the consul
     <bpmn:association id="Association_0wokyaa" sourceRef="Task_1mkdezq" targetRef="TextAnnotation_032vtms" />
     <bpmn:association id="Association_1y272dy" sourceRef="Task_0m7kb31" targetRef="TextAnnotation_0wv4hov" />
     <bpmn:association id="Association_1nzfosq" sourceRef="Task_07mna3f" targetRef="TextAnnotation_00p2iw0" />
+    <bpmn:textAnnotation id="TextAnnotation_1kqjk4a">
+      <bpmn:text>Painpoint: Customer needs to read through it himself/herself. There is a chance for further mistakes</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0a5ljld" sourceRef="Task_01tnudu" targetRef="TextAnnotation_1kqjk4a" />
+    <bpmn:association id="Association_086zqee" sourceRef="Task_0vcca5t" targetRef="TextAnnotation_1kqjk4a" />
+    <bpmn:textAnnotation id="TextAnnotation_0vo04gu">
+      <bpmn:text>Painpoint: 
+Maybe the customer doesn't know what the change means. Like, he has no one to explain the points to him/her</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0xo4674" sourceRef="Task_1t4uybr" targetRef="TextAnnotation_0vo04gu" />
+    <bpmn:textAnnotation id="TextAnnotation_0hg5j6k">
+      <bpmn:text>Painpoint: We have no way of keeping track of the contractual paper or of the customer</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1jed7sq" sourceRef="EndEvent_0j2tmof" targetRef="TextAnnotation_0hg5j6k" />
+    <bpmn:textAnnotation id="TextAnnotation_0otni8w">
+      <bpmn:text>Painpoint:
+We have no conformation, if the customer received the contract</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_14t1bsc" sourceRef="IntermediateThrowEvent_0fsftc1" targetRef="TextAnnotation_0otni8w" />
   </bpmn:process>
   <bpmn:message id="Message_1u5d9p9" name="Message_to_Consultant-Send_Application" />
   <bpmn:message id="Message_0en3pfi" name="Message_to_Customer-Statusupdate_1_Application" />
@@ -487,14 +559,14 @@ Everything is done manually. By hand, in the office (customer goes to the consul
         <di:waypoint x="905" y="900" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Participant_09boxaq_di" bpmnElement="Participant_09boxaq" isHorizontal="true">
-        <dc:Bounds x="160" y="720" width="2500" height="599" />
+        <dc:Bounds x="160" y="720" width="2500" height="686" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_10osr7s_di" bpmnElement="SequenceFlow_10osr7s">
         <di:waypoint x="2090" y="1130" />
         <di:waypoint x="2120" y="1130" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Lane_0s0l6ul_di" bpmnElement="Lane_0s0l6ul" isHorizontal="true">
-        <dc:Bounds x="190" y="720" width="2470" height="599" />
+        <dc:Bounds x="190" y="720" width="2470" height="686" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="MessageFlow_1h2ynhq_di" bpmnElement="MessageFlow_1h2ynhq" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <di:waypoint x="670" y="457" />
@@ -517,7 +589,7 @@ Everything is done manually. By hand, in the office (customer goes to the consul
         <di:waypoint x="1282" y="544" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Participant_1ga5h04_di" bpmnElement="Participant_1ga5h04" isHorizontal="true">
-        <dc:Bounds x="160" y="85" width="2498" height="545" />
+        <dc:Bounds x="160" y="85" width="2600" height="545" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="StartEvent_1tgdqnp_di" bpmnElement="StartEvent_10abg84" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <dc:Bounds x="412" y="882" width="36" height="36" />
@@ -908,6 +980,107 @@ Everything is done manually. By hand, in the office (customer goes to the consul
       <bpmndi:BPMNEdge id="DataInputAssociation_16mbfqq_di" bpmnElement="DataInputAssociation_16mbfqq">
         <di:waypoint x="1166" y="1115" />
         <di:waypoint x="1181" y="1050" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_1gcthz5_di" bpmnElement="TextAnnotation_1gcthz5">
+        <dc:Bounds x="860" y="1200" width="100" height="96" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_11acyxz_di" bpmnElement="Association_11acyxz">
+        <di:waypoint x="1010" y="927" />
+        <di:waypoint x="910" y="980" />
+        <di:waypoint x="910" y="1200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_0fx8p38_di" bpmnElement="TextAnnotation_0fx8p38">
+        <dc:Bounds x="980" y="1130" width="100" height="166" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_14yhqfd_di" bpmnElement="Association_14yhqfd">
+        <di:waypoint x="1054" y="1050" />
+        <di:waypoint x="1042" y="1130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_1xynjiv_di" bpmnElement="TextAnnotation_1xynjiv">
+        <dc:Bounds x="1200" y="1180" width="230" height="116" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0dcpqfa_di" bpmnElement="Association_0dcpqfa">
+        <di:waypoint x="1212" y="1050" />
+        <di:waypoint x="1283" y="1180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_07aoazu_di" bpmnElement="TextAnnotation_07aoazu">
+        <dc:Bounds x="1470" y="1188" width="140" height="120" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0abxgpn_di" bpmnElement="Association_0abxgpn">
+        <di:waypoint x="1573" y="1170" />
+        <di:waypoint x="1565" y="1188" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_16ztisl_di" bpmnElement="TextAnnotation_16ztisl">
+        <dc:Bounds x="1610" y="732" width="235" height="96" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0ih10sf_di" bpmnElement="Association_0ih10sf">
+        <di:waypoint x="1618" y="864" />
+        <di:waypoint x="1665" y="828" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_18qsixx_di" bpmnElement="TextAnnotation_18qsixx">
+        <dc:Bounds x="1660" y="1177" width="195" height="152" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_09g3kpj_di" bpmnElement="Association_09g3kpj">
+        <di:waypoint x="1616" y="1048" />
+        <di:waypoint x="1690" y="1110" />
+        <di:waypoint x="1722" y="1177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_13ocizh_di" bpmnElement="TextAnnotation_13ocizh">
+        <dc:Bounds x="1910" y="1202" width="168" height="96" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0trpkz7_di" bpmnElement="Association_0trpkz7">
+        <di:waypoint x="2025" y="1170" />
+        <di:waypoint x="2012" y="1202" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_0m41xwg_di" bpmnElement="TextAnnotation_0m41xwg">
+        <dc:Bounds x="2120" y="1194" width="190" height="136" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0gezvao_di" bpmnElement="Association_0gezvao">
+        <di:waypoint x="2184" y="1170" />
+        <di:waypoint x="2192" y="1194" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_1o8bnxl_di" bpmnElement="TextAnnotation_1o8bnxl">
+        <dc:Bounds x="2400" y="1090" width="189" height="152" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_1d0oib0_di" bpmnElement="Association_1d0oib0">
+        <di:waypoint x="2400" y="1025" />
+        <di:waypoint x="2444" y="1090" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_02jboeh_di" bpmnElement="Association_02jboeh">
+        <di:waypoint x="1716" y="1050" />
+        <di:waypoint x="1737" y="1177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_1kqjk4a_di" bpmnElement="TextAnnotation_1kqjk4a">
+        <dc:Bounds x="1110" y="127" width="100" height="124" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0a5ljld_di" bpmnElement="Association_0a5ljld">
+        <di:waypoint x="1152" y="377" />
+        <di:waypoint x="1157" y="251" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_086zqee_di" bpmnElement="Association_086zqee">
+        <di:waypoint x="1276" y="377" />
+        <di:waypoint x="1199" y="251" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_0vo04gu_di" bpmnElement="TextAnnotation_0vo04gu">
+        <dc:Bounds x="1770" y="96" width="100" height="152" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0xo4674_di" bpmnElement="Association_0xo4674">
+        <di:waypoint x="1772" y="340" />
+        <di:waypoint x="1798" y="248" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_0hg5j6k_di" bpmnElement="TextAnnotation_0hg5j6k">
+        <dc:Bounds x="2480" y="350" width="100" height="96" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_1jed7sq_di" bpmnElement="Association_1jed7sq">
+        <di:waypoint x="2539" y="512" />
+        <di:waypoint x="2534" y="446" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_0otni8w_di" bpmnElement="TextAnnotation_0otni8w">
+        <dc:Bounds x="2250" y="400" width="100" height="96" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_14t1bsc_di" bpmnElement="Association_14t1bsc">
+        <di:waypoint x="2204" y="519" />
+        <di:waypoint x="2250" y="485" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
