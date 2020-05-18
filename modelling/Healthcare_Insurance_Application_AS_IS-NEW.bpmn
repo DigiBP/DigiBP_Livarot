@@ -13,7 +13,7 @@
     <bpmn:messageFlow id="MessageFlow_1l162h1" sourceRef="Task_0p6n6t0" targetRef="IntermediateThrowEvent_1wupwxk" />
     <bpmn:messageFlow id="MessageFlow_10hxa5l" sourceRef="Task_0rmevfz" targetRef="IntermediateThrowEvent_0fsftc1" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_Insurance-AS_IS" isExecutable="true" camunda:versionTag="1.3">
+  <bpmn:process id="Process_Insurance-AS_IS" name="Employee_Process" isExecutable="true" camunda:versionTag="1.5">
     <bpmn:laneSet id="LaneSet_02z0z8s">
       <bpmn:lane id="Lane_0s0l6ul" name="Consultant">
         <bpmn:flowNodeRef>StartEvent_10abg84</bpmn:flowNodeRef>
@@ -44,7 +44,7 @@
       <bpmn:outgoing>SequenceFlow_0ap3p39</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_1enbi4t" messageRef="Message_1u5d9p9" />
     </bpmn:startEvent>
-    <bpmn:userTask id="Task_1mz8wtm" name="Check for missing information" camunda:candidateGroups="engineer">
+    <bpmn:userTask id="Task_1mz8wtm" name="Check for missing information" camunda:candidateGroups="engineer,employee">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="information_missing" label="Any information missing?" type="boolean" />
@@ -65,10 +65,14 @@
       <bpmn:outgoing>SequenceFlow_1tadhy1</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_01rfy0p</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="Task_11lmnpe" name="Assess application" camunda:candidateGroups="engineer">
+    <bpmn:userTask id="Task_11lmnpe" name="Assess application" camunda:candidateGroups="engineer,employee">
       <bpmn:extensionElements>
         <camunda:formData>
-          <camunda:formField id="assesment_decision" label="Assesment about the application? [rejected, alternative offer, accepted]" type="string" defaultValue=" [rejected, alternative offer, accepted]" />
+          <camunda:formField id="assesment_decision" label="Assesment about the application? [rejected, alternative offer, accepted]" type="enum">
+            <camunda:value id="rejected" name="Rejected" />
+            <camunda:value id="alternative_offer" name="Alternative Offer" />
+            <camunda:value id="accepted" name="Accepted" />
+          </camunda:formField>
           <camunda:formField id="familyname" label="Applicant family name:" type="string" />
           <camunda:formField id="personal_name" label="Applicant name:" type="string" />
           <camunda:formField id="age" label="Applicant age:" type="string" />
@@ -90,10 +94,15 @@
       <bpmn:outgoing>SequenceFlow_1y4nc79</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_1cgmb29</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="Task_0t7hdkx" name="Alternative offer is created" camunda:candidateGroups="engineer">
+    <bpmn:userTask id="Task_0t7hdkx" name="Alternative offer is created" camunda:candidateGroups="engineer,employee">
       <bpmn:extensionElements>
         <camunda:formData>
-          <camunda:formField id="insurance_type" label="Which insurance type would you recommend to the customer as alternative?" type="string" />
+          <camunda:formField id="insurance_type" label="Which insurance type would you recommend to the customer as alternative?" type="enum">
+            <camunda:value id="private_basic" name="Basis-Versicherung" />
+            <camunda:value id="private_extended" name="Erweiterte-Versicherung" />
+            <camunda:value id="private_deluxe" name="PRemium-Versicherung" />
+            <camunda:value id="life_insurance" name="Lebensversicherung" />
+          </camunda:formField>
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1wb7ice</bpmn:incoming>
@@ -161,7 +170,12 @@
       <bpmn:incoming>SequenceFlow_0rpj2ap</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1ygcm85</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:userTask id="Task_1w7w86i" name="Receive application">
+    <bpmn:userTask id="Task_1w7w86i" name="Receive application" camunda:candidateGroups="engineer,employee">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="application_received" label="Hello Employee - We have a new or updated application. Please go to the postbox and take it to your desk." type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0ap3p39</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1aegx1h</bpmn:outgoing>
     </bpmn:userTask>
@@ -177,8 +191,12 @@
     <bpmn:sequenceFlow id="SequenceFlow_1aegx1h" sourceRef="Task_1w7w86i" targetRef="ExclusiveGateway_18uyavm" />
     <bpmn:sequenceFlow id="SequenceFlow_1axisn1" sourceRef="ExclusiveGateway_1w40jbv" targetRef="EndEvent_135ck5v" />
     <bpmn:sequenceFlow id="SequenceFlow_1dika3h" sourceRef="Task_1b1p2cv" targetRef="ExclusiveGateway_1w40jbv" />
-    <bpmn:sequenceFlow id="SequenceFlow_1rw18ln" name="No" sourceRef="ExclusiveGateway_1biy8jc" targetRef="Task_1b1p2cv" />
-    <bpmn:sequenceFlow id="SequenceFlow_1sz64xj" name="Yes" sourceRef="ExclusiveGateway_1biy8jc" targetRef="ExclusiveGateway_10twgh1" />
+    <bpmn:sequenceFlow id="SequenceFlow_1rw18ln" name="No" sourceRef="ExclusiveGateway_1biy8jc" targetRef="Task_1b1p2cv">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${accept_alternative_offer == false}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_1sz64xj" name="Yes" sourceRef="ExclusiveGateway_1biy8jc" targetRef="ExclusiveGateway_10twgh1">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${accept_alternative_offer == true}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_01ptb26" sourceRef="IntermediateThrowEvent_1yrkgqh" targetRef="ExclusiveGateway_1biy8jc" />
     <bpmn:sequenceFlow id="SequenceFlow_1ygcm85" sourceRef="Task_1q9qvd3" targetRef="IntermediateThrowEvent_1yrkgqh" />
     <bpmn:sequenceFlow id="SequenceFlow_1g4flb8" sourceRef="Task_0rmevfz" targetRef="ExclusiveGateway_1w40jbv" />
@@ -193,7 +211,7 @@
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${assesment_decision == "rejected"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_1wb7ice" name="Alternative offer" sourceRef="ExclusiveGateway_1t60xmu" targetRef="Task_0t7hdkx">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${assesment_decision == "alternative offer"}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${assesment_decision == "alternative_offer"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_1pxq32e" sourceRef="Task_11lmnpe" targetRef="ExclusiveGateway_1t60xmu" />
     <bpmn:sequenceFlow id="SequenceFlow_1de52o0" sourceRef="Task_071br12" targetRef="Task_11lmnpe" />
@@ -273,8 +291,8 @@ We lose our customers here. We can't remember which customers we had, if we don'
     <bpmn:association id="Association_1d0oib0" sourceRef="EndEvent_135ck5v" targetRef="TextAnnotation_1o8bnxl" />
     <bpmn:association id="Association_02jboeh" sourceRef="Task_1q9qvd3" targetRef="TextAnnotation_18qsixx" />
   </bpmn:process>
-  <bpmn:process id="Process_Application-AS_IS" isExecutable="true" camunda:versionTag="1.3">
-    <bpmn:userTask id="Task_0m7kb31" name="Find and Fill out Insurance Application" camunda:candidateGroups="engineer">
+  <bpmn:process id="Process_Application-AS_IS" name="Applicant_Process" isExecutable="true" camunda:versionTag="1.5">
+    <bpmn:userTask id="Task_0m7kb31" name="Find and Fill out Insurance Application" camunda:candidateGroups="engineer,customer">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="insurance_type" label="Name the insurance-Type you want:" type="enum">
@@ -311,7 +329,7 @@ We lose our customers here. We can't remember which customers we had, if we don'
       <bpmn:incoming>SequenceFlow_1rqbs1p</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0n0o1fj</bpmn:outgoing>
     </bpmn:manualTask>
-    <bpmn:userTask id="Task_1t4uybr" name="Decision if contract is accepted" camunda:candidateGroups="engineer">
+    <bpmn:userTask id="Task_1t4uybr" name="Decision if contract is accepted" camunda:candidateGroups="engineer,customer">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="accept_alternative_offer" label="Accept alternative offer?" type="boolean" />
@@ -356,10 +374,15 @@ We lose our customers here. We can't remember which customers we had, if we don'
     <bpmn:endEvent id="EndEvent_0j2tmof">
       <bpmn:incoming>SequenceFlow_17w5uk0</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:userTask id="Task_0vcca5t" name="Fill out missing information">
+    <bpmn:userTask id="Task_0vcca5t" name="Fill out missing information" camunda:candidateGroups="engineer,customer">
       <bpmn:extensionElements>
         <camunda:formData>
-          <camunda:formField id="insurance_type" label="Name the insurance-Type you want:" type="string" />
+          <camunda:formField id="insurance_type" label="Name the insurance-Type you want:" type="enum">
+            <camunda:value id="private_basic" name="Basis-Versicherung" />
+            <camunda:value id="private_extended" name="Erweiterte-Versicherung" />
+            <camunda:value id="private_deluxe" name="Pemium-Versicherung" />
+            <camunda:value id="life_insurance" name="Lebensversicherung" />
+          </camunda:formField>
           <camunda:formField id="familyname" label="Your familyname:" type="string" />
           <camunda:formField id="personal_name" label="Your name:" type="string" />
           <camunda:formField id="age" label="Your age:" type="string" />
@@ -374,10 +397,6 @@ We lose our customers here. We can't remember which customers we had, if we don'
       <bpmn:outgoing>SequenceFlow_1ip9c4c</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_0k9ffd2" camunda:expression="${runtimeService.createMessageCorrelation(&#34;Message_to_Consultant-Customer_corrected_Application&#34;).processInstanceBusinessKey(execution.getBusinessKey()).setVariables(execution.getVariables()).correlate()}" />
     </bpmn:intermediateThrowEvent>
-    <bpmn:task id="Task_01tnudu" name="Notice received about what is missing">
-      <bpmn:incoming>SequenceFlow_17fod1s</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1kb4km4</bpmn:outgoing>
-    </bpmn:task>
     <bpmn:intermediateCatchEvent id="IntermediateThrowEvent_0fsftc1" name="Contract received">
       <bpmn:incoming>SequenceFlow_0j7kheg</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0j0n8ej</bpmn:outgoing>
@@ -402,29 +421,52 @@ We lose our customers here. We can't remember which customers we had, if we don'
     execution.setProcessBusinessKey(strongUuidGenerator.getNextId());
 }</bpmn:script>
     </bpmn:scriptTask>
-    <bpmn:sequenceFlow id="SequenceFlow_0j0n8ej" sourceRef="IntermediateThrowEvent_0fsftc1" targetRef="ExclusiveGateway_0dev8fk" />
-    <bpmn:sequenceFlow id="SequenceFlow_1izpihd" sourceRef="Task_0vcca5t" targetRef="IntermediateThrowEvent_1gqs6yf" />
-    <bpmn:sequenceFlow id="SequenceFlow_17w5uk0" sourceRef="ExclusiveGateway_0dev8fk" targetRef="EndEvent_0j2tmof" />
-    <bpmn:sequenceFlow id="SequenceFlow_15nng5m" name="No" sourceRef="ExclusiveGateway_1xq6ak6" targetRef="ExclusiveGateway_0dev8fk" />
-    <bpmn:sequenceFlow id="SequenceFlow_1ro2f2r" name="Yes" sourceRef="ExclusiveGateway_1xq6ak6" targetRef="ExclusiveGateway_1t4rv75" />
-    <bpmn:sequenceFlow id="SequenceFlow_0en73si" sourceRef="IntermediateThrowEvent_0qxdnab" targetRef="ExclusiveGateway_1xq6ak6" />
-    <bpmn:sequenceFlow id="SequenceFlow_06yn7ao" name="Application accepted" sourceRef="ExclusiveGateway_0ga2153" targetRef="ExclusiveGateway_1t4rv75" />
-    <bpmn:sequenceFlow id="SequenceFlow_152mt5s" sourceRef="IntermediateThrowEvent_1wupwxk" targetRef="ExclusiveGateway_0ga2153" />
-    <bpmn:sequenceFlow id="SequenceFlow_0j7kheg" sourceRef="ExclusiveGateway_1t4rv75" targetRef="IntermediateThrowEvent_0fsftc1" />
-    <bpmn:sequenceFlow id="SequenceFlow_19999dc" sourceRef="Task_1t4uybr" targetRef="IntermediateThrowEvent_0qxdnab" />
-    <bpmn:sequenceFlow id="SequenceFlow_1brpvpv" name="Alternative offer" sourceRef="ExclusiveGateway_0ga2153" targetRef="Task_1t4uybr" />
-    <bpmn:sequenceFlow id="SequenceFlow_0n0o1fj" sourceRef="Task_057qtii" targetRef="ExclusiveGateway_0dev8fk" />
-    <bpmn:sequenceFlow id="SequenceFlow_1rqbs1p" name="Application rejection" sourceRef="ExclusiveGateway_0ga2153" targetRef="Task_057qtii" />
-    <bpmn:sequenceFlow id="SequenceFlow_1kb4km4" sourceRef="Task_01tnudu" targetRef="Task_0vcca5t" />
-    <bpmn:sequenceFlow id="SequenceFlow_0pzr9e6" sourceRef="ExclusiveGateway_0vjs7bu" targetRef="IntermediateThrowEvent_07sz8rf" />
-    <bpmn:sequenceFlow id="SequenceFlow_0vg47ik" sourceRef="Task_0m7kb31" targetRef="Task_07mna3f" />
-    <bpmn:sequenceFlow id="SequenceFlow_0b8ydb4" name="No" sourceRef="ExclusiveGateway_0pgq47i" targetRef="IntermediateThrowEvent_1wupwxk" />
-    <bpmn:sequenceFlow id="SequenceFlow_1je5ok1" sourceRef="IntermediateThrowEvent_07sz8rf" targetRef="ExclusiveGateway_0pgq47i" />
-    <bpmn:sequenceFlow id="SequenceFlow_17fod1s" name="Yes" sourceRef="ExclusiveGateway_0pgq47i" targetRef="Task_01tnudu" />
-    <bpmn:sequenceFlow id="SequenceFlow_121qnen" sourceRef="Task_07mna3f" targetRef="ExclusiveGateway_0vjs7bu" />
-    <bpmn:sequenceFlow id="SequenceFlow_1ip9c4c" sourceRef="IntermediateThrowEvent_1gqs6yf" targetRef="ExclusiveGateway_0vjs7bu" />
-    <bpmn:sequenceFlow id="SequenceFlow_1sxeknf" sourceRef="StartEvent_1" targetRef="Task_1mkdezq" />
+    <bpmn:userTask id="Task_01tnudu" name="Notice received about what is missing">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="info_application_incomplete" label="Hello Customer! Your application has missing spots. Please get your application from the post office and add the missing or wrong information." type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_17fod1s</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1kb4km4</bpmn:outgoing>
+    </bpmn:userTask>
     <bpmn:sequenceFlow id="SequenceFlow_1n6y0bh" sourceRef="Task_1mkdezq" targetRef="Task_0m7kb31" />
+    <bpmn:sequenceFlow id="SequenceFlow_1sxeknf" sourceRef="StartEvent_1" targetRef="Task_1mkdezq" />
+    <bpmn:sequenceFlow id="SequenceFlow_1ip9c4c" sourceRef="IntermediateThrowEvent_1gqs6yf" targetRef="ExclusiveGateway_0vjs7bu" />
+    <bpmn:sequenceFlow id="SequenceFlow_121qnen" sourceRef="Task_07mna3f" targetRef="ExclusiveGateway_0vjs7bu" />
+    <bpmn:sequenceFlow id="SequenceFlow_17fod1s" name="Yes" sourceRef="ExclusiveGateway_0pgq47i" targetRef="Task_01tnudu">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${information_missing == true}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_1je5ok1" sourceRef="IntermediateThrowEvent_07sz8rf" targetRef="ExclusiveGateway_0pgq47i" />
+    <bpmn:sequenceFlow id="SequenceFlow_0b8ydb4" name="No" sourceRef="ExclusiveGateway_0pgq47i" targetRef="IntermediateThrowEvent_1wupwxk">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${information_missing == false}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_0vg47ik" sourceRef="Task_0m7kb31" targetRef="Task_07mna3f" />
+    <bpmn:sequenceFlow id="SequenceFlow_0pzr9e6" sourceRef="ExclusiveGateway_0vjs7bu" targetRef="IntermediateThrowEvent_07sz8rf" />
+    <bpmn:sequenceFlow id="SequenceFlow_1kb4km4" sourceRef="Task_01tnudu" targetRef="Task_0vcca5t" />
+    <bpmn:sequenceFlow id="SequenceFlow_1rqbs1p" name="Application rejection" sourceRef="ExclusiveGateway_0ga2153" targetRef="Task_057qtii">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${assesment_decision == "rejected"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_0n0o1fj" sourceRef="Task_057qtii" targetRef="ExclusiveGateway_0dev8fk" />
+    <bpmn:sequenceFlow id="SequenceFlow_1brpvpv" name="Alternative offer" sourceRef="ExclusiveGateway_0ga2153" targetRef="Task_1t4uybr">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${assesment_decision == "alternative_offer"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_19999dc" sourceRef="Task_1t4uybr" targetRef="IntermediateThrowEvent_0qxdnab" />
+    <bpmn:sequenceFlow id="SequenceFlow_0j7kheg" sourceRef="ExclusiveGateway_1t4rv75" targetRef="IntermediateThrowEvent_0fsftc1" />
+    <bpmn:sequenceFlow id="SequenceFlow_152mt5s" sourceRef="IntermediateThrowEvent_1wupwxk" targetRef="ExclusiveGateway_0ga2153" />
+    <bpmn:sequenceFlow id="SequenceFlow_06yn7ao" name="Application accepted" sourceRef="ExclusiveGateway_0ga2153" targetRef="ExclusiveGateway_1t4rv75">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${assesment_decision == "accepted"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_0en73si" sourceRef="IntermediateThrowEvent_0qxdnab" targetRef="ExclusiveGateway_1xq6ak6" />
+    <bpmn:sequenceFlow id="SequenceFlow_1ro2f2r" name="Yes" sourceRef="ExclusiveGateway_1xq6ak6" targetRef="ExclusiveGateway_1t4rv75">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${accept_alternative_offer == true}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_15nng5m" name="No" sourceRef="ExclusiveGateway_1xq6ak6" targetRef="ExclusiveGateway_0dev8fk">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${accept_alternative_offer == false}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_17w5uk0" sourceRef="ExclusiveGateway_0dev8fk" targetRef="EndEvent_0j2tmof" />
+    <bpmn:sequenceFlow id="SequenceFlow_1izpihd" sourceRef="Task_0vcca5t" targetRef="IntermediateThrowEvent_1gqs6yf" />
+    <bpmn:sequenceFlow id="SequenceFlow_0j0n8ej" sourceRef="IntermediateThrowEvent_0fsftc1" targetRef="ExclusiveGateway_0dev8fk" />
     <bpmn:textAnnotation id="TextAnnotation_0ctcbu6">
       <bpmn:text>This process was created by the DigiBP_Livarot Spring 2020 Group</bpmn:text>
     </bpmn:textAnnotation>
@@ -441,29 +483,29 @@ We lose our customers here. We can't remember which customers we had, if we don'
       <bpmn:text>Painpoint for As-Is:
 Everything is done manually. By hand, in the office (customer goes to the consultant) or by email. Communication is tiresome</bpmn:text>
     </bpmn:textAnnotation>
-    <bpmn:association id="Association_0flk5fq" sourceRef="StartEvent_1" targetRef="TextAnnotation_0ctcbu6" />
-    <bpmn:association id="Association_0wokyaa" sourceRef="Task_1mkdezq" targetRef="TextAnnotation_032vtms" />
-    <bpmn:association id="Association_1y272dy" sourceRef="Task_0m7kb31" targetRef="TextAnnotation_0wv4hov" />
-    <bpmn:association id="Association_1nzfosq" sourceRef="Task_07mna3f" targetRef="TextAnnotation_00p2iw0" />
     <bpmn:textAnnotation id="TextAnnotation_1kqjk4a">
       <bpmn:text>Painpoint: Customer needs to read through it himself/herself. There is a chance for further mistakes</bpmn:text>
     </bpmn:textAnnotation>
-    <bpmn:association id="Association_0a5ljld" sourceRef="Task_01tnudu" targetRef="TextAnnotation_1kqjk4a" />
-    <bpmn:association id="Association_086zqee" sourceRef="Task_0vcca5t" targetRef="TextAnnotation_1kqjk4a" />
     <bpmn:textAnnotation id="TextAnnotation_0vo04gu">
       <bpmn:text>Painpoint: 
 Maybe the customer doesn't know what the change means. Like, he has no one to explain the points to him/her</bpmn:text>
     </bpmn:textAnnotation>
-    <bpmn:association id="Association_0xo4674" sourceRef="Task_1t4uybr" targetRef="TextAnnotation_0vo04gu" />
     <bpmn:textAnnotation id="TextAnnotation_0hg5j6k">
       <bpmn:text>Painpoint: We have no way of keeping track of the contractual paper or of the customer</bpmn:text>
     </bpmn:textAnnotation>
-    <bpmn:association id="Association_1jed7sq" sourceRef="EndEvent_0j2tmof" targetRef="TextAnnotation_0hg5j6k" />
     <bpmn:textAnnotation id="TextAnnotation_0otni8w">
       <bpmn:text>Painpoint:
 We have no conformation, if the customer received the contract</bpmn:text>
     </bpmn:textAnnotation>
+    <bpmn:association id="Association_1y272dy" sourceRef="Task_0m7kb31" targetRef="TextAnnotation_0wv4hov" />
+    <bpmn:association id="Association_0xo4674" sourceRef="Task_1t4uybr" targetRef="TextAnnotation_0vo04gu" />
+    <bpmn:association id="Association_1jed7sq" sourceRef="EndEvent_0j2tmof" targetRef="TextAnnotation_0hg5j6k" />
+    <bpmn:association id="Association_086zqee" sourceRef="Task_0vcca5t" targetRef="TextAnnotation_1kqjk4a" />
     <bpmn:association id="Association_14t1bsc" sourceRef="IntermediateThrowEvent_0fsftc1" targetRef="TextAnnotation_0otni8w" />
+    <bpmn:association id="Association_0flk5fq" sourceRef="StartEvent_1" targetRef="TextAnnotation_0ctcbu6" />
+    <bpmn:association id="Association_1nzfosq" sourceRef="Task_07mna3f" targetRef="TextAnnotation_00p2iw0" />
+    <bpmn:association id="Association_0wokyaa" sourceRef="Task_1mkdezq" targetRef="TextAnnotation_032vtms" />
+    <bpmn:association id="Association_0a5ljld" sourceRef="Task_01tnudu" targetRef="TextAnnotation_1kqjk4a" />
   </bpmn:process>
   <bpmn:message id="Message_1u5d9p9" name="Message_to_Consultant-Send_Application" />
   <bpmn:message id="Message_0en3pfi" name="Message_to_Customer-Statusupdate_1_Application" />
@@ -474,14 +516,14 @@ We have no conformation, if the customer received the contract</bpmn:text>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_Insurance-Application">
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
-        <dc:Bounds x="242" y="399" width="36" height="36" />
+        <dc:Bounds x="212" y="414" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_0flk5fq_di" bpmnElement="Association_0flk5fq">
-        <di:waypoint x="263" y="399" />
-        <di:waypoint x="287" y="244" />
+        <di:waypoint x="233" y="414" />
+        <di:waypoint x="257" y="259" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="UserTask_1ufya4h_di" bpmnElement="Task_0m7kb31">
-        <dc:Bounds x="480" y="377" width="100" height="80" />
+        <dc:Bounds x="450" y="392" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="UserTask_0ix7zde_di" bpmnElement="Task_1mz8wtm" bioc:stroke="rgb(30, 136, 229)" bioc:fill="rgb(187, 222, 251)">
         <dc:Bounds x="750" y="860" width="100" height="80" />
@@ -505,30 +547,30 @@ We have no conformation, if the customer received the contract</bpmn:text>
         <dc:Bounds x="1520" y="970" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="UserTask_0i69s6n_di" bpmnElement="Task_0vcca5t">
-        <dc:Bounds x="1250" y="377" width="100" height="80" />
+        <dc:Bounds x="1220" y="392" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ManualTask_0jy30k5_di" bpmnElement="Task_057qtii">
-        <dc:Bounds x="1520" y="230" width="100" height="80" />
+        <dc:Bounds x="1490" y="245" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="UserTask_0drjw3y_di" bpmnElement="Task_1t4uybr" bioc:stroke="rgb(30, 136, 229)" bioc:fill="rgb(187, 222, 251)">
-        <dc:Bounds x="1710" y="340" width="100" height="80" />
+        <dc:Bounds x="1680" y="355" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_0ctcbu6_di" bpmnElement="TextAnnotation_0ctcbu6">
-        <dc:Bounds x="230" y="160" width="126" height="84" />
+        <dc:Bounds x="200" y="175" width="126" height="84" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0rpj2ap_di" bpmnElement="SequenceFlow_0rpj2ap">
         <di:waypoint x="1620" y="1010" />
         <di:waypoint x="1660" y="1010" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1ip9c4c_di" bpmnElement="SequenceFlow_1ip9c4c">
-        <di:waypoint x="1420" y="399" />
-        <di:waypoint x="1420" y="310" />
-        <di:waypoint x="810" y="310" />
-        <di:waypoint x="810" y="392" />
+        <di:waypoint x="1390" y="414" />
+        <di:waypoint x="1390" y="325" />
+        <di:waypoint x="780" y="325" />
+        <di:waypoint x="780" y="407" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1kb4km4_di" bpmnElement="SequenceFlow_1kb4km4">
-        <di:waypoint x="1200" y="417" />
-        <di:waypoint x="1250" y="417" />
+        <di:waypoint x="1170" y="432" />
+        <di:waypoint x="1220" y="432" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1y4nc79_di" bpmnElement="SequenceFlow_1y4nc79">
         <di:waypoint x="1380" y="985" />
@@ -542,7 +584,7 @@ We have no conformation, if the customer received the contract</bpmn:text>
         <di:waypoint x="1405" y="1010" />
         <di:waypoint x="1520" y="1010" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1424" y="992" width="77" height="14" />
+          <dc:Bounds x="1424" y="992" width="78" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1pxq32e_di" bpmnElement="SequenceFlow_1pxq32e">
@@ -569,8 +611,8 @@ We have no conformation, if the customer received the contract</bpmn:text>
         <dc:Bounds x="190" y="720" width="2470" height="686" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="MessageFlow_1h2ynhq_di" bpmnElement="MessageFlow_1h2ynhq" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
-        <di:waypoint x="670" y="457" />
-        <di:waypoint x="670" y="670" />
+        <di:waypoint x="640" y="472" />
+        <di:waypoint x="640" y="670" />
         <di:waypoint x="430" y="670" />
         <di:waypoint x="430" y="882" />
       </bpmndi:BPMNEdge>
@@ -579,17 +621,17 @@ We have no conformation, if the customer received the contract</bpmn:text>
         <di:waypoint x="1570" y="704" />
         <di:waypoint x="1290" y="704" />
         <di:waypoint x="1290" y="590" />
-        <di:waypoint x="1276" y="547" />
+        <di:waypoint x="1253" y="557" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="MessageFlow_193nzpi_di" bpmnElement="MessageFlow_193nzpi" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <di:waypoint x="1710" y="970" />
         <di:waypoint x="1710" y="680" />
         <di:waypoint x="1310" y="680" />
         <di:waypoint x="1310" y="580" />
-        <di:waypoint x="1282" y="544" />
+        <di:waypoint x="1256" y="552" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Participant_1ga5h04_di" bpmnElement="Participant_1ga5h04" isHorizontal="true">
-        <dc:Bounds x="160" y="85" width="2600" height="545" />
+        <dc:Bounds x="130" y="100" width="2600" height="545" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="StartEvent_1tgdqnp_di" bpmnElement="StartEvent_10abg84" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <dc:Bounds x="412" y="882" width="36" height="36" />
@@ -603,69 +645,69 @@ We have no conformation, if the customer received the contract</bpmn:text>
         <di:waypoint x="1140" y="1010" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_121qnen_di" bpmnElement="SequenceFlow_121qnen">
-        <di:waypoint x="720" y="417" />
-        <di:waypoint x="785" y="417" />
+        <di:waypoint x="690" y="432" />
+        <di:waypoint x="755" y="432" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="IntermediateCatchEvent_14csca6_di" bpmnElement="IntermediateThrowEvent_07sz8rf" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
-        <dc:Bounds x="882" y="399" width="36" height="36" />
+        <dc:Bounds x="852" y="414" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="MessageFlow_12qw6mf_di" bpmnElement="MessageFlow_12qw6mf" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <di:waypoint x="1038" y="860" />
         <di:waypoint x="1038" y="600" />
         <di:waypoint x="950" y="600" />
         <di:waypoint x="950" y="480" />
-        <di:waypoint x="911" y="431" />
+        <di:waypoint x="885" y="441" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="MessageFlow_0tlc2s1_di" bpmnElement="MessageFlow_0tlc2s1" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <di:waypoint x="1010" y="980" />
         <di:waypoint x="980" y="940" />
         <di:waypoint x="980" y="670" />
-        <di:waypoint x="900" y="670" />
-        <di:waypoint x="900" y="435" />
+        <di:waypoint x="870" y="670" />
+        <di:waypoint x="870" y="450" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ExclusiveGateway_0pgq47i_di" bpmnElement="ExclusiveGateway_0pgq47i" isMarkerVisible="true" bioc:stroke="rgb(30, 136, 229)" bioc:fill="rgb(187, 222, 251)">
-        <dc:Bounds x="985" y="392" width="50" height="50" />
+        <dc:Bounds x="955" y="407" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="982" y="355" width="56" height="27" />
+          <dc:Bounds x="952" y="370" width="56" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1je5ok1_di" bpmnElement="SequenceFlow_1je5ok1">
-        <di:waypoint x="918" y="417" />
-        <di:waypoint x="985" y="417" />
+        <di:waypoint x="888" y="432" />
+        <di:waypoint x="955" y="432" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_17fod1s_di" bpmnElement="SequenceFlow_17fod1s">
-        <di:waypoint x="1035" y="417" />
-        <di:waypoint x="1100" y="417" />
+        <di:waypoint x="1005" y="432" />
+        <di:waypoint x="1070" y="432" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1059" y="399" width="18" height="14" />
+          <dc:Bounds x="1029" y="414" width="18" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0b8ydb4_di" bpmnElement="SequenceFlow_0b8ydb4">
-        <di:waypoint x="1010" y="442" />
-        <di:waypoint x="1010" y="530" />
-        <di:waypoint x="1252" y="530" />
+        <di:waypoint x="980" y="457" />
+        <di:waypoint x="980" y="545" />
+        <di:waypoint x="1222" y="545" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1018" y="483" width="15" height="14" />
+          <dc:Bounds x="988" y="498" width="15" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="IntermediateCatchEvent_132j0ob_di" bpmnElement="IntermediateThrowEvent_1wupwxk" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
-        <dc:Bounds x="1252" y="512" width="36" height="36" />
+        <dc:Bounds x="1222" y="527" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ExclusiveGateway_0ga2153_di" bpmnElement="ExclusiveGateway_0ga2153" isMarkerVisible="true" bioc:stroke="rgb(30, 136, 229)" bioc:fill="rgb(187, 222, 251)">
-        <dc:Bounds x="1545" y="505" width="50" height="50" />
+        <dc:Bounds x="1515" y="520" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1479" y="550" width="81" height="40" />
+          <dc:Bounds x="1449" y="565" width="81" height="40" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_152mt5s_di" bpmnElement="SequenceFlow_152mt5s">
-        <di:waypoint x="1288" y="530" />
-        <di:waypoint x="1545" y="530" />
+        <di:waypoint x="1258" y="545" />
+        <di:waypoint x="1515" y="545" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1rqbs1p_di" bpmnElement="SequenceFlow_1rqbs1p">
-        <di:waypoint x="1570" y="505" />
-        <di:waypoint x="1570" y="310" />
+        <di:waypoint x="1540" y="520" />
+        <di:waypoint x="1540" y="325" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1506" y="463" width="54" height="27" />
+          <dc:Bounds x="1477" y="478" width="53" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1ygcm85_di" bpmnElement="SequenceFlow_1ygcm85">
@@ -676,42 +718,42 @@ We have no conformation, if the customer received the contract</bpmn:text>
         <dc:Bounds x="1802" y="992" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1brpvpv_di" bpmnElement="SequenceFlow_1brpvpv">
-        <di:waypoint x="1595" y="530" />
-        <di:waypoint x="1630" y="530" />
-        <di:waypoint x="1630" y="380" />
-        <di:waypoint x="1710" y="380" />
+        <di:waypoint x="1565" y="545" />
+        <di:waypoint x="1600" y="545" />
+        <di:waypoint x="1600" y="395" />
+        <di:waypoint x="1680" y="395" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1642" y="470" width="77" height="14" />
+          <dc:Bounds x="1612" y="485" width="78" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_19999dc_di" bpmnElement="SequenceFlow_19999dc">
-        <di:waypoint x="1810" y="380" />
-        <di:waypoint x="1872" y="380" />
+        <di:waypoint x="1780" y="395" />
+        <di:waypoint x="1842" y="395" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="IntermediateThrowEvent_0xb56vp_di" bpmnElement="IntermediateThrowEvent_0qxdnab" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
-        <dc:Bounds x="1872" y="362" width="36" height="36" />
+        <dc:Bounds x="1842" y="377" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="MessageFlow_029n9uj_di" bpmnElement="MessageFlow_029n9uj" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
-        <di:waypoint x="1890" y="398" />
-        <di:waypoint x="1890" y="695" />
+        <di:waypoint x="1860" y="413" />
+        <di:waypoint x="1860" y="695" />
         <di:waypoint x="1820" y="695" />
         <di:waypoint x="1820" y="992" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ExclusiveGateway_0vjs7bu_di" bpmnElement="ExclusiveGateway_0vjs7bu" isMarkerVisible="true">
-        <dc:Bounds x="785" y="392" width="50" height="50" />
+        <dc:Bounds x="755" y="407" width="50" height="50" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0vg47ik_di" bpmnElement="SequenceFlow_0vg47ik">
-        <di:waypoint x="580" y="417" />
-        <di:waypoint x="620" y="417" />
+        <di:waypoint x="550" y="432" />
+        <di:waypoint x="590" y="432" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_06yn7ao_di" bpmnElement="SequenceFlow_06yn7ao">
-        <di:waypoint x="1570" y="555" />
-        <di:waypoint x="1570" y="590" />
-        <di:waypoint x="1940" y="590" />
-        <di:waypoint x="1940" y="530" />
-        <di:waypoint x="1975" y="530" />
+        <di:waypoint x="1540" y="570" />
+        <di:waypoint x="1540" y="605" />
+        <di:waypoint x="1910" y="605" />
+        <di:waypoint x="1910" y="545" />
+        <di:waypoint x="1945" y="545" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1697" y="556" width="54" height="27" />
+          <dc:Bounds x="1668" y="571" width="53" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ExclusiveGateway_10twgh1_di" bpmnElement="ExclusiveGateway_10twgh1" isMarkerVisible="true">
@@ -754,28 +796,28 @@ We have no conformation, if the customer received the contract</bpmn:text>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ExclusiveGateway_1xq6ak6_di" bpmnElement="ExclusiveGateway_1xq6ak6" isMarkerVisible="true" bioc:stroke="rgb(30, 136, 229)" bioc:fill="rgb(187, 222, 251)">
-        <dc:Bounds x="1975" y="355" width="50" height="50" />
+        <dc:Bounds x="1945" y="370" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1975" y="331" width="51" height="14" />
+          <dc:Bounds x="1945" y="346" width="51" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0en73si_di" bpmnElement="SequenceFlow_0en73si">
-        <di:waypoint x="1908" y="380" />
-        <di:waypoint x="1975" y="380" />
+        <di:waypoint x="1878" y="395" />
+        <di:waypoint x="1945" y="395" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ExclusiveGateway_1t4rv75_di" bpmnElement="ExclusiveGateway_1t4rv75" isMarkerVisible="true">
-        <dc:Bounds x="1975" y="505" width="50" height="50" />
+        <dc:Bounds x="1945" y="520" width="50" height="50" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1ro2f2r_di" bpmnElement="SequenceFlow_1ro2f2r">
-        <di:waypoint x="2000" y="405" />
-        <di:waypoint x="2000" y="505" />
+        <di:waypoint x="1970" y="420" />
+        <di:waypoint x="1970" y="520" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="2006" y="452" width="18" height="14" />
+          <dc:Bounds x="1976" y="467" width="18" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0j7kheg_di" bpmnElement="SequenceFlow_0j7kheg">
-        <di:waypoint x="2025" y="530" />
-        <di:waypoint x="2172" y="530" />
+        <di:waypoint x="1995" y="545" />
+        <di:waypoint x="2142" y="545" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ExclusiveGateway_1w40jbv_di" bpmnElement="ExclusiveGateway_1w40jbv" isMarkerVisible="true">
         <dc:Bounds x="2265" y="985" width="50" height="50" />
@@ -802,27 +844,27 @@ We have no conformation, if the customer received the contract</bpmn:text>
         <di:waypoint x="2265" y="1010" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ExclusiveGateway_0dev8fk_di" bpmnElement="ExclusiveGateway_0dev8fk" isMarkerVisible="true">
-        <dc:Bounds x="2355" y="505" width="50" height="50" />
+        <dc:Bounds x="2325" y="520" width="50" height="50" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_0j2tmof_di" bpmnElement="EndEvent_0j2tmof">
-        <dc:Bounds x="2522" y="512" width="36" height="36" />
+        <dc:Bounds x="2492" y="527" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_17w5uk0_di" bpmnElement="SequenceFlow_17w5uk0">
-        <di:waypoint x="2405" y="530" />
-        <di:waypoint x="2522" y="530" />
+        <di:waypoint x="2375" y="545" />
+        <di:waypoint x="2492" y="545" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_15nng5m_di" bpmnElement="SequenceFlow_15nng5m">
-        <di:waypoint x="2025" y="380" />
-        <di:waypoint x="2380" y="380" />
-        <di:waypoint x="2380" y="505" />
+        <di:waypoint x="1995" y="395" />
+        <di:waypoint x="2350" y="395" />
+        <di:waypoint x="2350" y="520" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="2195" y="362" width="15" height="14" />
+          <dc:Bounds x="2165" y="377" width="15" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0n0o1fj_di" bpmnElement="SequenceFlow_0n0o1fj">
-        <di:waypoint x="1620" y="270" />
-        <di:waypoint x="2380" y="270" />
-        <di:waypoint x="2380" y="505" />
+        <di:waypoint x="1590" y="285" />
+        <di:waypoint x="2350" y="285" />
+        <di:waypoint x="2350" y="520" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ExclusiveGateway_18uyavm_di" bpmnElement="ExclusiveGateway_18uyavm" isMarkerVisible="true">
         <dc:Bounds x="635" y="875" width="50" height="50" />
@@ -836,8 +878,8 @@ We have no conformation, if the customer received the contract</bpmn:text>
         <di:waypoint x="750" y="900" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0pzr9e6_di" bpmnElement="SequenceFlow_0pzr9e6">
-        <di:waypoint x="835" y="417" />
-        <di:waypoint x="882" y="417" />
+        <di:waypoint x="805" y="432" />
+        <di:waypoint x="852" y="432" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_01rfy0p_di" bpmnElement="SequenceFlow_01rfy0p">
         <di:waypoint x="955" y="900" />
@@ -851,14 +893,14 @@ We have no conformation, if the customer received the contract</bpmn:text>
         <dc:Bounds x="1172" y="882" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1izpihd_di" bpmnElement="SequenceFlow_1izpihd">
-        <di:waypoint x="1350" y="417" />
-        <di:waypoint x="1402" y="417" />
+        <di:waypoint x="1320" y="432" />
+        <di:waypoint x="1372" y="432" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="IntermediateThrowEvent_0u8nnxz_di" bpmnElement="IntermediateThrowEvent_1gqs6yf" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
-        <dc:Bounds x="1402" y="399" width="36" height="36" />
+        <dc:Bounds x="1372" y="414" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="MessageFlow_1m9727j_di" bpmnElement="MessageFlow_1m9727j" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
-        <di:waypoint x="1414" y="434" />
+        <di:waypoint x="1387" y="449" />
         <di:waypoint x="1360" y="590" />
         <di:waypoint x="1360" y="800" />
         <di:waypoint x="1205" y="891" />
@@ -869,9 +911,6 @@ We have no conformation, if the customer received the contract</bpmn:text>
         <di:waypoint x="660" y="780" />
         <di:waypoint x="660" y="875" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Task_17v770w_di" bpmnElement="Task_01tnudu" bioc:stroke="rgb(30, 136, 229)" bioc:fill="rgb(187, 222, 251)">
-        <dc:Bounds x="1100" y="377" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_00e92f8_di" bpmnElement="Task_1ahua0n">
         <dc:Bounds x="1990" y="1090" width="100" height="80" />
       </bpmndi:BPMNShape>
@@ -884,33 +923,33 @@ We have no conformation, if the customer received the contract</bpmn:text>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="MessageFlow_1l162h1_di" bpmnElement="MessageFlow_1l162h1" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <di:waypoint x="1540" y="1160" />
-        <di:waypoint x="1270" y="1160" />
-        <di:waypoint x="1270" y="548" />
+        <di:waypoint x="1240" y="1160" />
+        <di:waypoint x="1240" y="563" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0j0n8ej_di" bpmnElement="SequenceFlow_0j0n8ej">
-        <di:waypoint x="2208" y="530" />
-        <di:waypoint x="2355" y="530" />
+        <di:waypoint x="2178" y="545" />
+        <di:waypoint x="2325" y="545" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="IntermediateCatchEvent_19bp8kq_di" bpmnElement="IntermediateThrowEvent_0fsftc1" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
-        <dc:Bounds x="2172" y="512" width="36" height="36" />
+        <dc:Bounds x="2142" y="527" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="2146" y="488" width="87" height="14" />
+          <dc:Bounds x="2116" y="503" width="87" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="MessageFlow_10hxa5l_di" bpmnElement="MessageFlow_10hxa5l" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
-        <di:waypoint x="2190" y="1090" />
-        <di:waypoint x="2190" y="548" />
+        <di:waypoint x="2160" y="1090" />
+        <di:waypoint x="2160" y="563" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1sxeknf_di" bpmnElement="SequenceFlow_1sxeknf">
-        <di:waypoint x="278" y="417" />
-        <di:waypoint x="330" y="417" />
+        <di:waypoint x="248" y="432" />
+        <di:waypoint x="300" y="432" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1n6y0bh_di" bpmnElement="SequenceFlow_1n6y0bh">
-        <di:waypoint x="430" y="417" />
-        <di:waypoint x="480" y="417" />
+        <di:waypoint x="400" y="432" />
+        <di:waypoint x="450" y="432" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="SendTask_0k8ppg7_di" bpmnElement="Task_07mna3f" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
-        <dc:Bounds x="620" y="377" width="100" height="80" />
+        <dc:Bounds x="590" y="392" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="SendTask_0dskao6_di" bpmnElement="Task_0aastz6" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <dc:Bounds x="1010" y="860" width="100" height="80" />
@@ -931,31 +970,31 @@ We have no conformation, if the customer received the contract</bpmn:text>
         <dc:Bounds x="1660" y="970" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ScriptTask_0maco2g_di" bpmnElement="Task_1mkdezq" bioc:stroke="rgb(142, 36, 170)" bioc:fill="rgb(225, 190, 231)">
-        <dc:Bounds x="330" y="377" width="100" height="80" />
+        <dc:Bounds x="300" y="392" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_032vtms_di" bpmnElement="TextAnnotation_032vtms">
-        <dc:Bounds x="340" y="250" width="100" height="68" />
+        <dc:Bounds x="310" y="265" width="100" height="68" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_0wokyaa_di" bpmnElement="Association_0wokyaa">
-        <di:waypoint x="383" y="377" />
-        <di:waypoint x="387" y="318" />
+        <di:waypoint x="353" y="392" />
+        <di:waypoint x="357" y="333" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="UserTask_15btuxq_di" bpmnElement="Task_1w7w86i" bioc:stroke="black" bioc:fill="white">
         <dc:Bounds x="490" y="860" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_0wv4hov_di" bpmnElement="TextAnnotation_0wv4hov">
-        <dc:Bounds x="425" y="99" width="195" height="145" />
+        <dc:Bounds x="395" y="114" width="195" height="145" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_1y272dy_di" bpmnElement="Association_1y272dy">
-        <di:waypoint x="529" y="377" />
-        <di:waypoint x="525" y="244" />
+        <di:waypoint x="499" y="392" />
+        <di:waypoint x="495" y="259" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="TextAnnotation_00p2iw0_di" bpmnElement="TextAnnotation_00p2iw0">
-        <dc:Bounds x="630" y="99" width="100" height="166" />
+        <dc:Bounds x="600" y="114" width="100" height="166" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_1nzfosq_di" bpmnElement="Association_1nzfosq">
-        <di:waypoint x="672" y="377" />
-        <di:waypoint x="676" y="265" />
+        <di:waypoint x="642" y="392" />
+        <di:waypoint x="646" y="280" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="TextAnnotation_1no3kmk_di" bpmnElement="TextAnnotation_1no3kmk">
         <dc:Bounds x="490" y="990" width="100" height="166" />
@@ -1051,37 +1090,40 @@ We have no conformation, if the customer received the contract</bpmn:text>
         <di:waypoint x="1737" y="1177" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="TextAnnotation_1kqjk4a_di" bpmnElement="TextAnnotation_1kqjk4a">
-        <dc:Bounds x="1110" y="127" width="100" height="124" />
+        <dc:Bounds x="1080" y="142" width="100" height="124" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_0a5ljld_di" bpmnElement="Association_0a5ljld">
-        <di:waypoint x="1152" y="377" />
-        <di:waypoint x="1157" y="251" />
+        <di:waypoint x="1122" y="392" />
+        <di:waypoint x="1127" y="266" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_086zqee_di" bpmnElement="Association_086zqee">
-        <di:waypoint x="1276" y="377" />
-        <di:waypoint x="1199" y="251" />
+        <di:waypoint x="1246" y="392" />
+        <di:waypoint x="1169" y="266" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="TextAnnotation_0vo04gu_di" bpmnElement="TextAnnotation_0vo04gu">
-        <dc:Bounds x="1770" y="96" width="100" height="152" />
+        <dc:Bounds x="1740" y="111" width="100" height="152" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_0xo4674_di" bpmnElement="Association_0xo4674">
-        <di:waypoint x="1772" y="340" />
-        <di:waypoint x="1798" y="248" />
+        <di:waypoint x="1742" y="355" />
+        <di:waypoint x="1768" y="263" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="TextAnnotation_0hg5j6k_di" bpmnElement="TextAnnotation_0hg5j6k">
-        <dc:Bounds x="2480" y="350" width="100" height="96" />
+        <dc:Bounds x="2450" y="365" width="100" height="96" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_1jed7sq_di" bpmnElement="Association_1jed7sq">
-        <di:waypoint x="2539" y="512" />
-        <di:waypoint x="2534" y="446" />
+        <di:waypoint x="2509" y="527" />
+        <di:waypoint x="2504" y="461" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="TextAnnotation_0otni8w_di" bpmnElement="TextAnnotation_0otni8w">
-        <dc:Bounds x="2250" y="400" width="100" height="96" />
+        <dc:Bounds x="2220" y="415" width="100" height="96" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_14t1bsc_di" bpmnElement="Association_14t1bsc">
-        <di:waypoint x="2204" y="519" />
-        <di:waypoint x="2250" y="485" />
+        <di:waypoint x="2174" y="534" />
+        <di:waypoint x="2220" y="500" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_16qdl4o_di" bpmnElement="Task_01tnudu" bioc:stroke="rgb(30, 136, 229)" bioc:fill="rgb(187, 222, 251)">
+        <dc:Bounds x="1070" y="392" width="100" height="80" />
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
