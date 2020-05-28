@@ -1,162 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="Definitions_1pqbijh" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.6.0">
-  <decision id="Decision_1xwr2en" name="Check for missing information">
-    <extensionElements>
-      <biodi:bounds x="251" y="80" width="180" height="80" />
-      <biodi:edge source="InputData_1dl1hjn">
-        <biodi:waypoints x="227" y="236" />
-        <biodi:waypoints x="253" y="160" />
-      </biodi:edge>
-      <biodi:edge source="InputData_1n14yom">
-        <biodi:waypoints x="349" y="210" />
-        <biodi:waypoints x="336" y="160" />
-      </biodi:edge>
-    </extensionElements>
-    <informationRequirement>
-      <requiredInput href="#InputData_1dl1hjn" />
-    </informationRequirement>
-    <informationRequirement>
-      <requiredInput href="#InputData_1n14yom" />
-    </informationRequirement>
-    <decisionTable id="decisionTable_1">
-      <input id="input_1" label="Requested insurance type">
-        <inputExpression id="inputExpression_1" typeRef="string">
-          <text>${!empty myVariable}</text>
-        </inputExpression>
-      </input>
-      <input id="InputClause_0ka4xv4" label="Family name">
-        <inputExpression id="LiteralExpression_0d1l87b" typeRef="string" expressionLanguage="JUEL">
-          <text></text>
-        </inputExpression>
-      </input>
-      <input id="InputClause_1w06los" label="Personal name">
-        <inputExpression id="LiteralExpression_02eogw0" typeRef="string">
-          <text></text>
-        </inputExpression>
-      </input>
-      <input id="InputClause_06awi2m" label="age">
-        <inputExpression id="LiteralExpression_1idsas2" typeRef="string">
-          <text></text>
-        </inputExpression>
-      </input>
-      <input id="InputClause_0dqwf9m" label="Existing health conditions">
-        <inputExpression id="LiteralExpression_0t692rg" typeRef="string">
-          <text></text>
-        </inputExpression>
-      </input>
-      <output id="output_1" label="Missing information?" name="information_missing" typeRef="boolean" />
-      <rule id="DecisionRule_0yxysgc">
-        <inputEntry id="UnaryTests_153zj7n">
-          <text>${!empty myVariable}</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_079kb2r">
-          <text>${!empty myVariable}</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1kifuzu">
-          <text>${!empty myVariable}</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0cv2nuh">
-          <text>${!empty myVariable}</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0942byi">
-          <text></text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_1d2i1np">
-          <text></text>
-        </outputEntry>
-      </rule>
-      <rule id="DecisionRule_103k6e0">
-        <inputEntry id="UnaryTests_0iacsdm">
-          <text>" "</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0138ci9">
-          <text>" "</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1s4eaor">
-          <text>" "</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_097pfuw">
-          <text>" "</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1ouiy9f">
-          <text></text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_1ljyimn">
-          <text></text>
-        </outputEntry>
-      </rule>
-      <rule id="DecisionRule_11huyrf">
-        <inputEntry id="UnaryTests_1d8ed49">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_11wy10l">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0pd7fbx">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_06smtnn">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1ovynpj">
-          <text></text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_10843y5">
-          <text></text>
-        </outputEntry>
-      </rule>
-      <rule id="DecisionRule_0yrsdux">
-        <inputEntry id="UnaryTests_13p805b">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1ub8q4e">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1p3kmp5">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0kv2v9u">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0ijer8s">
-          <text></text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_1a79ptm">
-          <text></text>
-        </outputEntry>
-      </rule>
-      <rule id="DecisionRule_08bsv5l">
-        <inputEntry id="UnaryTests_18ddqjh">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_142744g">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1ihpuxc">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0ji3xmz">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1tpnd2y">
-          <text></text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_1yp4a77">
-          <text></text>
-        </outputEntry>
-      </rule>
-    </decisionTable>
-  </decision>
   <decision id="Decision_1hmf6lx" name="Assess application">
     <extensionElements>
-      <biodi:bounds x="624" y="80" width="180" height="80" />
+      <biodi:bounds x="463" y="80" width="180" height="80" />
       <biodi:edge source="Decision_0asv6jd">
-        <biodi:waypoints x="721" y="256" />
-        <biodi:waypoints x="726" y="160" />
+        <biodi:waypoints x="560" y="256" />
+        <biodi:waypoints x="565" y="160" />
       </biodi:edge>
       <biodi:edge source="BusinessKnowledgeModel_19p9967">
-        <biodi:waypoints x="910" y="175" />
-        <biodi:waypoints x="804" y="153" />
+        <biodi:waypoints x="749" y="175" />
+        <biodi:waypoints x="643" y="153" />
       </biodi:edge>
     </extensionElements>
     <informationRequirement>
@@ -204,62 +57,62 @@
   </decision>
   <decision id="Decision_0asv6jd" name="Health condition decision">
     <extensionElements>
-      <biodi:bounds x="629" y="256" width="180" height="80" />
+      <biodi:bounds x="468" y="256" width="180" height="80" />
       <biodi:edge source="KnowledgeSource_1a95slz">
-        <biodi:waypoints x="482" y="364" />
-        <biodi:waypoints x="628" y="296" />
+        <biodi:waypoints x="321" y="364" />
+        <biodi:waypoints x="467" y="296" />
       </biodi:edge>
       <biodi:edge source="KnowledgeSource_1whctum">
-        <biodi:waypoints x="1193" y="354" />
-        <biodi:waypoints x="809" y="317" />
+        <biodi:waypoints x="1032" y="354" />
+        <biodi:waypoints x="648" y="317" />
       </biodi:edge>
       <biodi:edge source="KnowledgeSource_180dmbb">
-        <biodi:waypoints x="1087" y="299" />
-        <biodi:waypoints x="809" y="281" />
+        <biodi:waypoints x="926" y="299" />
+        <biodi:waypoints x="648" y="281" />
       </biodi:edge>
       <biodi:edge source="KnowledgeSource_1otvp1y">
-        <biodi:waypoints x="562" y="419" />
-        <biodi:waypoints x="665" y="336" />
+        <biodi:waypoints x="401" y="419" />
+        <biodi:waypoints x="504" y="336" />
       </biodi:edge>
       <biodi:edge source="InputData_0klvst4">
-        <biodi:waypoints x="541" y="649" />
-        <biodi:waypoints x="698" y="336" />
+        <biodi:waypoints x="380" y="649" />
+        <biodi:waypoints x="537" y="336" />
       </biodi:edge>
       <biodi:edge source="InputData_1h4hjw5">
-        <biodi:waypoints x="670" y="615" />
-        <biodi:waypoints x="721" y="336" />
+        <biodi:waypoints x="509" y="615" />
+        <biodi:waypoints x="560" y="336" />
       </biodi:edge>
       <biodi:edge source="InputData_0vxu4j9">
-        <biodi:waypoints x="775" y="554" />
-        <biodi:waypoints x="749" y="336" />
+        <biodi:waypoints x="614" y="554" />
+        <biodi:waypoints x="588" y="336" />
       </biodi:edge>
       <biodi:edge source="InputData_17hxm46">
-        <biodi:waypoints x="1110" y="536" />
-        <biodi:waypoints x="793" y="336" />
+        <biodi:waypoints x="949" y="536" />
+        <biodi:waypoints x="632" y="336" />
       </biodi:edge>
       <biodi:edge source="InputData_1d9c5ns">
-        <biodi:waypoints x="977" y="534" />
-        <biodi:waypoints x="792" y="336" />
+        <biodi:waypoints x="816" y="534" />
+        <biodi:waypoints x="631" y="336" />
       </biodi:edge>
       <biodi:edge source="InputData_1jzhzxj">
-        <biodi:waypoints x="898" y="598" />
-        <biodi:waypoints x="748" y="336" />
+        <biodi:waypoints x="737" y="598" />
+        <biodi:waypoints x="587" y="336" />
       </biodi:edge>
       <biodi:edge source="InputData_0n4wi6k">
-        <biodi:waypoints x="468" y="587" />
-        <biodi:waypoints x="678" y="336" />
+        <biodi:waypoints x="307" y="587" />
+        <biodi:waypoints x="517" y="336" />
       </biodi:edge>
       <biodi:edge source="InputData_0bxsqr9">
-        <biodi:waypoints x="409" y="513" />
-        <biodi:waypoints x="636" y="336" />
+        <biodi:waypoints x="248" y="513" />
+        <biodi:waypoints x="475" y="336" />
       </biodi:edge>
       <biodi:edge source="InputData_12bpov5">
-        <biodi:waypoints x="1206" y="492" />
-        <biodi:waypoints x="809" y="331" />
+        <biodi:waypoints x="1045" y="492" />
+        <biodi:waypoints x="648" y="331" />
       </biodi:edge>
       <biodi:edge source="InputData_1lr0czt">
-        <biodi:waypoints x="1257" y="438" />
-        <biodi:waypoints x="809" y="321" />
+        <biodi:waypoints x="1096" y="438" />
+        <biodi:waypoints x="648" y="321" />
       </biodi:edge>
     </extensionElements>
     <informationRequirement>
@@ -346,87 +199,77 @@
   </decision>
   <inputData id="InputData_0n4wi6k" name="Heart desease">
     <extensionElements>
-      <biodi:bounds x="405" y="587" width="125" height="45" />
+      <biodi:bounds x="244" y="587" width="125" height="45" />
     </extensionElements>
   </inputData>
   <knowledgeSource id="KnowledgeSource_1otvp1y" name="Medical knowledge">
     <extensionElements>
-      <biodi:bounds x="477" y="419" width="100" height="63" />
+      <biodi:bounds x="316" y="419" width="100" height="63" />
     </extensionElements>
   </knowledgeSource>
   <businessKnowledgeModel id="BusinessKnowledgeModel_19p9967" name="Policy for health condition">
     <extensionElements>
-      <biodi:bounds x="846" y="175" width="135" height="46" />
+      <biodi:bounds x="685" y="175" width="135" height="46" />
     </extensionElements>
   </businessKnowledgeModel>
   <knowledgeSource id="KnowledgeSource_1a95slz" name="Knowledge about corona virus">
     <extensionElements>
-      <biodi:bounds x="382" y="349" width="100" height="63" />
+      <biodi:bounds x="221" y="349" width="100" height="63" />
     </extensionElements>
   </knowledgeSource>
-  <inputData id="InputData_1dl1hjn" name="Age">
-    <extensionElements>
-      <biodi:bounds x="156" y="236" width="125" height="45" />
-    </extensionElements>
-  </inputData>
-  <inputData id="InputData_1n14yom" name="Name">
-    <extensionElements>
-      <biodi:bounds x="292" y="210" width="125" height="45" />
-    </extensionElements>
-  </inputData>
   <knowledgeSource id="KnowledgeSource_1whctum" name="Health desease">
     <extensionElements>
-      <biodi:bounds x="1193" y="342" width="100" height="63" />
+      <biodi:bounds x="1032" y="342" width="100" height="63" />
     </extensionElements>
   </knowledgeSource>
   <knowledgeSource id="KnowledgeSource_180dmbb" name="BMI">
     <extensionElements>
-      <biodi:bounds x="1087" y="274" width="100" height="63" />
+      <biodi:bounds x="926" y="274" width="100" height="63" />
     </extensionElements>
   </knowledgeSource>
   <inputData id="InputData_0klvst4" name="Overweight">
     <extensionElements>
-      <biodi:bounds x="467" y="649" width="125" height="45" />
+      <biodi:bounds x="306" y="649" width="125" height="45" />
     </extensionElements>
   </inputData>
   <inputData id="InputData_1h4hjw5" name="Cancer">
     <extensionElements>
-      <biodi:bounds x="603" y="615" width="125" height="45" />
+      <biodi:bounds x="442" y="615" width="125" height="45" />
     </extensionElements>
   </inputData>
   <inputData id="InputData_0vxu4j9" name="High blod preassure">
     <extensionElements>
-      <biodi:bounds x="715" y="554" width="125" height="45" />
+      <biodi:bounds x="554" y="554" width="125" height="45" />
     </extensionElements>
   </inputData>
   <inputData id="InputData_1jzhzxj" name="Rauchen">
     <extensionElements>
-      <biodi:bounds x="848" y="598" width="125" height="45" />
+      <biodi:bounds x="687" y="598" width="125" height="45" />
     </extensionElements>
   </inputData>
   <inputData id="InputData_1d9c5ns" name="Trinken">
     <extensionElements>
-      <biodi:bounds x="936" y="534" width="125" height="45" />
+      <biodi:bounds x="775" y="534" width="125" height="45" />
     </extensionElements>
   </inputData>
   <inputData id="InputData_17hxm46" name="Doing regular sport">
     <extensionElements>
-      <biodi:bounds x="1084" y="536" width="125" height="45" />
+      <biodi:bounds x="923" y="536" width="125" height="45" />
     </extensionElements>
   </inputData>
   <inputData id="InputData_0bxsqr9" name="Age">
     <extensionElements>
-      <biodi:bounds x="317" y="513" width="125" height="45" />
+      <biodi:bounds x="156" y="513" width="125" height="45" />
     </extensionElements>
   </inputData>
   <inputData id="InputData_12bpov5" name="Takes medicmantation">
     <extensionElements>
-      <biodi:bounds x="1199" y="492" width="125" height="45" />
+      <biodi:bounds x="1038" y="492" width="125" height="45" />
     </extensionElements>
   </inputData>
   <inputData id="InputData_1lr0czt" name="Gender">
     <extensionElements>
-      <biodi:bounds x="1257" y="431" width="125" height="45" />
+      <biodi:bounds x="1096" y="431" width="125" height="45" />
     </extensionElements>
   </inputData>
 </definitions>

@@ -122,7 +122,7 @@
         <bpmn:targetRef>Property_0astkf0</bpmn:targetRef>
       </bpmn:dataInputAssociation>
     </bpmn:manualTask>
-    <bpmn:businessRuleTask id="Task_1tuo8kd" name="DMM Assess application" camunda:decisionRef="Decision_1hmf6lx">
+    <bpmn:businessRuleTask id="Task_1tuo8kd" name="Assess application" camunda:decisionRef="Decision_1hmf6lx">
       <bpmn:incoming>SequenceFlow_1de52o0a</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1pxq32ea</bpmn:outgoing>
       <bpmn:property id="Property_0fpvaa2" name="__targetRef_placeholder" />
@@ -206,6 +206,10 @@
         <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">2s</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:intermediateCatchEvent>
+    <bpmn:textAnnotation id="TextAnnotation_0x9biz2">
+      <bpmn:text>PDF-Generator + PDF via email verschicken</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_156fu3w" sourceRef="Task_1ahua0naa" targetRef="TextAnnotation_0x9biz2" />
   </bpmn:process>
   <bpmn:process id="Process_Application-TO-BE-2" name="Applicant_Process-TO-BE-2" isExecutable="true" camunda:candidateStarterGroups="engineer" camunda:versionTag="10.0">
     <bpmn:startEvent id="StartEvent_1a">
@@ -361,6 +365,16 @@
       <bpmn:text>This process was created by the DigiBP_Livarot Spring 2020 Group</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_0flk5fqa" sourceRef="StartEvent_1a" targetRef="TextAnnotation_0ctcbu6a" />
+    <bpmn:textAnnotation id="TextAnnotation_04swczc">
+      <bpmn:text>Mögliche Lösung:
+- Loop und sheet alle 2 minuten prüfen
+- Webhook-call zurück an Camunda</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0it13xp" sourceRef="Task_1t4uybra" targetRef="TextAnnotation_04swczc" />
+    <bpmn:textAnnotation id="TextAnnotation_191a0r3">
+      <bpmn:text>PDF verschicken</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1v9vghw" sourceRef="ServiceTask_1pigsf6" targetRef="TextAnnotation_191a0r3" />
   </bpmn:process>
   <bpmn:message id="Message_1u5d9p9" name="Message_to_Consultant-Send_Application-2" />
   <bpmn:message id="Message_0en3pfi" name="Message_to_Customer-Statusupdate_1_Application-2" />
@@ -399,7 +413,7 @@
         <di:waypoint x="1310" y="860" />
         <di:waypoint x="1390" y="860" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1y4nc79_di" bpmnElement="SequenceFlow_1y4nc79a">
+      <bpmndi:BPMNEdge id="SequenceFlow_1y4nc79_di" bpmnElement="SequenceFlow_1y4nc79a" bioc:stroke="rgb(30, 136, 229)" bioc:fill="rgb(187, 222, 251)">
         <di:waypoint x="890" y="835" />
         <di:waypoint x="890" y="750" />
         <di:waypoint x="1020" y="750" />
@@ -407,7 +421,7 @@
           <dc:Bounds x="933" y="733" width="44" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1wb7ice_di" bpmnElement="SequenceFlow_1wb7icea">
+      <bpmndi:BPMNEdge id="SequenceFlow_1wb7ice_di" bpmnElement="SequenceFlow_1wb7icea" bioc:stroke="rgb(30, 136, 229)" bioc:fill="rgb(187, 222, 251)">
         <di:waypoint x="915" y="860" />
         <di:waypoint x="1020" y="860" />
         <bpmndi:BPMNLabel>
@@ -469,7 +483,7 @@
         <di:waypoint x="708" y="282" />
         <di:waypoint x="805" y="282" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1rqbs1p_di" bpmnElement="SequenceFlow_1rqbs1pa">
+      <bpmndi:BPMNEdge id="SequenceFlow_1rqbs1p_di" bpmnElement="SequenceFlow_1rqbs1pa" bioc:stroke="rgb(30, 136, 229)" bioc:fill="rgb(187, 222, 251)">
         <di:waypoint x="830" y="257" />
         <di:waypoint x="830" y="160" />
         <di:waypoint x="940" y="160" />
@@ -484,7 +498,7 @@
       <bpmndi:BPMNShape id="IntermediateCatchEvent_1x165s4_di" bpmnElement="IntermediateThrowEvent_1yrkgqha" bioc:stroke="rgb(67, 160, 71)" bioc:fill="rgb(200, 230, 201)">
         <dc:Bounds x="1562" y="842" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_1brpvpv_di" bpmnElement="SequenceFlow_1brpvpva">
+      <bpmndi:BPMNEdge id="SequenceFlow_1brpvpv_di" bpmnElement="SequenceFlow_1brpvpva" bioc:stroke="rgb(30, 136, 229)" bioc:fill="rgb(187, 222, 251)">
         <di:waypoint x="855" y="282" />
         <di:waypoint x="940" y="282" />
         <bpmndi:BPMNLabel>
@@ -504,7 +518,7 @@
         <di:waypoint x="1580" y="530" />
         <di:waypoint x="1580" y="842" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_06yn7ao_di" bpmnElement="SequenceFlow_06yn7aoaa">
+      <bpmndi:BPMNEdge id="SequenceFlow_06yn7ao_di" bpmnElement="SequenceFlow_06yn7aoaa" bioc:stroke="rgb(30, 136, 229)" bioc:fill="rgb(187, 222, 251)">
         <di:waypoint x="830" y="307" />
         <di:waypoint x="830" y="410" />
         <di:waypoint x="940" y="410" />
@@ -515,7 +529,7 @@
       <bpmndi:BPMNShape id="ExclusiveGateway_10twgh1_di" bpmnElement="ExclusiveGateway_10twgh1aa" isMarkerVisible="true">
         <dc:Bounds x="1665" y="945" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_1cgmb29_di" bpmnElement="SequenceFlow_1cgmb29a">
+      <bpmndi:BPMNEdge id="SequenceFlow_1cgmb29_di" bpmnElement="SequenceFlow_1cgmb29a" bioc:stroke="rgb(30, 136, 229)" bioc:fill="rgb(187, 222, 251)">
         <di:waypoint x="890" y="885" />
         <di:waypoint x="890" y="970" />
         <di:waypoint x="1020" y="970" />
@@ -537,14 +551,14 @@
         <di:waypoint x="1598" y="860" />
         <di:waypoint x="1665" y="860" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1sz64xj_di" bpmnElement="SequenceFlow_1sz64xja">
+      <bpmndi:BPMNEdge id="SequenceFlow_1sz64xj_di" bpmnElement="SequenceFlow_1sz64xja" bioc:stroke="rgb(30, 136, 229)" bioc:fill="rgb(187, 222, 251)">
         <di:waypoint x="1690" y="885" />
         <di:waypoint x="1690" y="945" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1701" y="902" width="18" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1rw18ln_di" bpmnElement="SequenceFlow_1rw18lna">
+      <bpmndi:BPMNEdge id="SequenceFlow_1rw18ln_di" bpmnElement="SequenceFlow_1rw18lna" bioc:stroke="rgb(30, 136, 229)" bioc:fill="rgb(187, 222, 251)">
         <di:waypoint x="1715" y="860" />
         <di:waypoint x="1770" y="860" />
         <bpmndi:BPMNLabel>
@@ -564,7 +578,7 @@
       <bpmndi:BPMNShape id="ExclusiveGateway_1t4rv75_di" bpmnElement="ExclusiveGateway_1t4rv75a" isMarkerVisible="true">
         <dc:Bounds x="1445" y="385" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_1ro2f2r_di" bpmnElement="SequenceFlow_1ro2f2ra">
+      <bpmndi:BPMNEdge id="SequenceFlow_1ro2f2r_di" bpmnElement="SequenceFlow_1ro2f2ra" bioc:stroke="rgb(30, 136, 229)" bioc:fill="rgb(187, 222, 251)">
         <di:waypoint x="1470" y="307" />
         <di:waypoint x="1470" y="385" />
         <bpmndi:BPMNLabel>
@@ -609,7 +623,7 @@
         <di:waypoint x="1815" y="282" />
         <di:waypoint x="1862" y="282" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_15nng5m_di" bpmnElement="SequenceFlow_15nng5maa">
+      <bpmndi:BPMNEdge id="SequenceFlow_15nng5m_di" bpmnElement="SequenceFlow_15nng5maa" bioc:stroke="rgb(30, 136, 229)" bioc:fill="rgb(187, 222, 251)">
         <di:waypoint x="1495" y="282" />
         <di:waypoint x="1765" y="282" />
         <bpmndi:BPMNLabel>
@@ -868,6 +882,27 @@
           <dc:Bounds x="443" y="885" width="34" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0x9biz2_di" bpmnElement="TextAnnotation_0x9biz2">
+        <dc:Bounds x="1900" y="1055" width="99.99274099883856" height="53.426248548199766" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_156fu3w_di" bpmnElement="Association_156fu3w">
+        <di:waypoint x="1865" y="1009" />
+        <di:waypoint x="1919" y="1055" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_191a0r3_di" bpmnElement="TextAnnotation_191a0r3">
+        <dc:Bounds x="1680" y="310" width="99.99274099883856" height="39.48896631823461" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_1v9vghw_di" bpmnElement="Association_1v9vghw">
+        <di:waypoint x="1715" y="370" />
+        <di:waypoint x="1723" y="349" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_04swczc_di" bpmnElement="TextAnnotation_04swczc">
+        <dc:Bounds x="1250" y="170" width="319.5049361207898" height="60.39488966318235" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0it13xp_di" bpmnElement="Association_0it13xp">
+        <di:waypoint x="1220" y="265" />
+        <di:waypoint x="1321" y="230" />
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
