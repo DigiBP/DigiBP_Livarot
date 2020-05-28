@@ -18,9 +18,11 @@
     <knowledgeRequirement>
       <requiredKnowledge href="#BusinessKnowledgeModel_19p9967" />
     </knowledgeRequirement>
-    <decisionTable id="DecisionTable_0ufqgti">
+    <decisionTable id="DecisionTable_0ufqgti" hitPolicy="FIRST">
       <input id="InputClause_1s2g1xw" label="Requested insurance type">
-        <inputExpression id="LiteralExpression_0i94gv9" typeRef="string" />
+        <inputExpression id="LiteralExpression_0i94gv9" typeRef="string">
+          <text>insurance_type</text>
+        </inputExpression>
         <inputValues id="UnaryTests_132hqpx">
           <text>"private_basic","private_extended","private_premium","life_insurance","Basic","Extended","Premium","Life"</text>
         </inputValues>
@@ -187,7 +189,7 @@
     <extensionElements>
       <biodi:bounds x="468" y="256" width="180" height="80" />
       <biodi:edge source="KnowledgeSource_1whctum">
-        <biodi:waypoints x="1032" y="354" />
+        <biodi:waypoints x="839" y="409" />
         <biodi:waypoints x="648" y="317" />
       </biodi:edge>
       <biodi:edge source="InputData_0klvst4">
@@ -203,11 +205,11 @@
         <biodi:waypoints x="588" y="336" />
       </biodi:edge>
       <biodi:edge source="InputData_17hxm46">
-        <biodi:waypoints x="949" y="536" />
+        <biodi:waypoints x="820" y="515" />
         <biodi:waypoints x="632" y="336" />
       </biodi:edge>
       <biodi:edge source="InputData_1d9c5ns">
-        <biodi:waypoints x="778" y="585" />
+        <biodi:waypoints x="751" y="579" />
         <biodi:waypoints x="631" y="336" />
       </biodi:edge>
       <biodi:edge source="InputData_0n4wi6k">
@@ -219,7 +221,7 @@
         <biodi:waypoints x="475" y="336" />
       </biodi:edge>
       <biodi:edge source="KnowledgeSource_1otvp1y">
-        <biodi:waypoints x="226" y="383" />
+        <biodi:waypoints x="262" y="398" />
         <biodi:waypoints x="468" y="296" />
       </biodi:edge>
     </extensionElements>
@@ -250,17 +252,17 @@
     <authorityRequirement>
       <requiredAuthority href="#KnowledgeSource_1whctum" />
     </authorityRequirement>
-    <decisionTable id="DecisionTable_07jlrzi">
+    <decisionTable id="DecisionTable_07jlrzi" hitPolicy="FIRST">
       <input id="InputClause_1dd4vgd" label="Conditions">
         <inputExpression id="LiteralExpression_1ue0hvm" typeRef="string">
-          <text>conditions</text>
+          <text>existing_conditions</text>
         </inputExpression>
         <inputValues id="UnaryTests_090b2x2">
           <text>"Smoking","Diabetes","Hypertension","Heart Desease"</text>
         </inputValues>
       </input>
       <input id="InputClause_1eaa0i2" label="Age">
-        <inputExpression id="LiteralExpression_02xea5f" typeRef="string">
+        <inputExpression id="LiteralExpression_02xea5f" typeRef="integer">
           <text>age</text>
         </inputExpression>
       </input>
@@ -470,7 +472,7 @@
   </inputData>
   <knowledgeSource id="KnowledgeSource_1otvp1y" name="Medical knowledge">
     <extensionElements>
-      <biodi:bounds x="141" y="383" width="100" height="63" />
+      <biodi:bounds x="177" y="398" width="100" height="63" />
     </extensionElements>
   </knowledgeSource>
   <businessKnowledgeModel id="BusinessKnowledgeModel_19p9967" name="Policy for health condition">
@@ -480,7 +482,7 @@
   </businessKnowledgeModel>
   <knowledgeSource id="KnowledgeSource_1whctum" name="Health desease">
     <extensionElements>
-      <biodi:bounds x="1032" y="342" width="100" height="63" />
+      <biodi:bounds x="839" y="397" width="100" height="63" />
     </extensionElements>
   </knowledgeSource>
   <inputData id="InputData_0klvst4" name="Overweight">
@@ -500,12 +502,12 @@
   </inputData>
   <inputData id="InputData_1d9c5ns" name="Deseases">
     <extensionElements>
-      <biodi:bounds x="737" y="585" width="125" height="45" />
+      <biodi:bounds x="710" y="579" width="125" height="45" />
     </extensionElements>
   </inputData>
   <inputData id="InputData_17hxm46" name="Smokes">
     <extensionElements>
-      <biodi:bounds x="923" y="536" width="125" height="45" />
+      <biodi:bounds x="794" y="515" width="125" height="45" />
     </extensionElements>
   </inputData>
   <inputData id="InputData_0bxsqr9" name="Age">

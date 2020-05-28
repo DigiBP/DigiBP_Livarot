@@ -123,6 +123,11 @@
       </bpmn:dataInputAssociation>
     </bpmn:manualTask>
     <bpmn:businessRuleTask id="Task_1tuo8kd" name="Assess application" camunda:decisionRef="Decision_1hmf6lx">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:outputParameter name="assesment_decision">${result.get('assesment_decision')}</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1de52o0a</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1pxq32ea</bpmn:outgoing>
       <bpmn:property id="Property_0fpvaa2" name="__targetRef_placeholder" />
