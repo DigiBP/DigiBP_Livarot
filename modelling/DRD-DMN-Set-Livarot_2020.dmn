@@ -22,34 +22,162 @@
       <input id="InputClause_1s2g1xw" label="Requested insurance type">
         <inputExpression id="LiteralExpression_0i94gv9" typeRef="string" />
         <inputValues id="UnaryTests_132hqpx">
-          <text>"private_basic"</text>
+          <text>"private_basic","private_extended","private_premium","life_insurance","Basic","Extended","Premium","Life"</text>
         </inputValues>
       </input>
-      <input id="InputClause_0z7bavu" label="age">
-        <inputExpression id="LiteralExpression_1ft40zj" typeRef="string">
-          <text></text>
-        </inputExpression>
-      </input>
-      <input id="InputClause_042vewa" label="Existing health conditions">
+      <input id="InputClause_042vewa" label="Risk Group">
         <inputExpression id="LiteralExpression_12pjln2" typeRef="string">
-          <text></text>
+          <text>risk_group</text>
         </inputExpression>
         <inputValues id="UnaryTests_04kndmr">
-          <text>"bad","medium","good","very good"</text>
+          <text>"Green","Yellow","Red"</text>
         </inputValues>
       </input>
-      <output id="OutputClause_0h3rss0" typeRef="string" />
+      <output id="OutputClause_0h3rss0" label="Assesment Decision" name="assesment_decision" typeRef="string">
+        <outputValues id="UnaryTests_16xl82v">
+          <text>"accepted","alternative_offer","rejected"</text>
+        </outputValues>
+      </output>
       <rule id="DecisionRule_0yupmqo">
         <inputEntry id="UnaryTests_0chvvks">
-          <text></text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1wie648">
-          <text></text>
+          <text>"Basic"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_1em7hpr">
-          <text></text>
+          <text>"Green"</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1bjyouc">
+          <text>"accepted"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0yubg8t">
+        <inputEntry id="UnaryTests_1uxq5r9">
+          <text>"Basic"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_190bv20">
+          <text>"Yellow"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0wd7kob">
+          <text>"accepted"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1c3zw7l">
+        <inputEntry id="UnaryTests_18dvvqk">
+          <text>"Basic"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1rk3kqp">
+          <text>"Red"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0gwq8ta">
+          <text>"rejected"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1sefi4w">
+        <inputEntry id="UnaryTests_1bb5dws">
+          <text>"Extended"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_09kyuo5">
+          <text>"Green"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0xmj6r3">
+          <text>"accepted"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0hukx2a">
+        <inputEntry id="UnaryTests_0pk6k8q">
+          <text>"Extended"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1lni5wl">
+          <text>"Yellow"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_03ocbnd">
+          <text>"alternative_offer"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_10jbkij">
+        <inputEntry id="UnaryTests_0xt3z3k">
+          <text>"Extended"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1prsnv1">
+          <text>"Red"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0y5gaxt">
+          <text>"alternative_offer"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1v5ceqq">
+        <inputEntry id="UnaryTests_1nehooc">
+          <text>"Premium"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_12w7dn4">
+          <text>"Green"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_12qwcnr">
+          <text>"accepted"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0ghm91a">
+        <inputEntry id="UnaryTests_12sdx7a">
+          <text>"Premium"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1fhhq2h">
+          <text>"Yellow"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1xmrqs0">
+          <text>"alternative_offer"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0f6qkk6">
+        <inputEntry id="UnaryTests_1cq6gz0">
+          <text>"Premium"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1tu3ovp">
+          <text>"Red"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0uumo6h">
+          <text>"alternative_offer"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1fsr1de">
+        <inputEntry id="UnaryTests_01233g3">
+          <text>"Life"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0a5jaxn">
+          <text>"Green"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1gnwhdw">
+          <text>"accepted"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_153lul2">
+        <inputEntry id="UnaryTests_1yfl687">
+          <text>"Life"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_12kp5lg">
+          <text>"Yellow"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0o21lcu">
+          <text>"rejected"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1ci62ga">
+        <inputEntry id="UnaryTests_0fudapz">
+          <text>"Life"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_11il1jp">
+          <text>"Red"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_04expb7">
+          <text>"rejected"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1htfvro">
+        <inputEntry id="UnaryTests_1fe3fro">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_147jlo4">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1e4p71l">
           <text></text>
         </outputEntry>
       </rule>
@@ -58,28 +186,16 @@
   <decision id="Decision_0asv6jd" name="Health condition decision">
     <extensionElements>
       <biodi:bounds x="468" y="256" width="180" height="80" />
-      <biodi:edge source="KnowledgeSource_1a95slz">
-        <biodi:waypoints x="321" y="364" />
-        <biodi:waypoints x="467" y="296" />
-      </biodi:edge>
       <biodi:edge source="KnowledgeSource_1whctum">
         <biodi:waypoints x="1032" y="354" />
         <biodi:waypoints x="648" y="317" />
-      </biodi:edge>
-      <biodi:edge source="KnowledgeSource_180dmbb">
-        <biodi:waypoints x="926" y="299" />
-        <biodi:waypoints x="648" y="281" />
-      </biodi:edge>
-      <biodi:edge source="KnowledgeSource_1otvp1y">
-        <biodi:waypoints x="401" y="419" />
-        <biodi:waypoints x="504" y="336" />
       </biodi:edge>
       <biodi:edge source="InputData_0klvst4">
         <biodi:waypoints x="380" y="649" />
         <biodi:waypoints x="537" y="336" />
       </biodi:edge>
       <biodi:edge source="InputData_1h4hjw5">
-        <biodi:waypoints x="509" y="615" />
+        <biodi:waypoints x="516" y="616" />
         <biodi:waypoints x="560" y="336" />
       </biodi:edge>
       <biodi:edge source="InputData_0vxu4j9">
@@ -91,12 +207,8 @@
         <biodi:waypoints x="632" y="336" />
       </biodi:edge>
       <biodi:edge source="InputData_1d9c5ns">
-        <biodi:waypoints x="816" y="534" />
+        <biodi:waypoints x="778" y="585" />
         <biodi:waypoints x="631" y="336" />
-      </biodi:edge>
-      <biodi:edge source="InputData_1jzhzxj">
-        <biodi:waypoints x="737" y="598" />
-        <biodi:waypoints x="587" y="336" />
       </biodi:edge>
       <biodi:edge source="InputData_0n4wi6k">
         <biodi:waypoints x="307" y="587" />
@@ -106,13 +218,9 @@
         <biodi:waypoints x="248" y="513" />
         <biodi:waypoints x="475" y="336" />
       </biodi:edge>
-      <biodi:edge source="InputData_12bpov5">
-        <biodi:waypoints x="1045" y="492" />
-        <biodi:waypoints x="648" y="331" />
-      </biodi:edge>
-      <biodi:edge source="InputData_1lr0czt">
-        <biodi:waypoints x="1096" y="438" />
-        <biodi:waypoints x="648" y="321" />
+      <biodi:edge source="KnowledgeSource_1otvp1y">
+        <biodi:waypoints x="226" y="383" />
+        <biodi:waypoints x="468" y="296" />
       </biodi:edge>
     </extensionElements>
     <informationRequirement>
@@ -134,65 +242,223 @@
       <requiredInput href="#InputData_1d9c5ns" />
     </informationRequirement>
     <informationRequirement>
-      <requiredInput href="#InputData_1jzhzxj" />
-    </informationRequirement>
-    <informationRequirement>
       <requiredInput href="#InputData_0bxsqr9" />
-    </informationRequirement>
-    <informationRequirement>
-      <requiredInput href="#InputData_12bpov5" />
-    </informationRequirement>
-    <informationRequirement>
-      <requiredInput href="#InputData_1lr0czt" />
     </informationRequirement>
     <authorityRequirement>
       <requiredAuthority href="#KnowledgeSource_1otvp1y" />
     </authorityRequirement>
     <authorityRequirement>
-      <requiredAuthority href="#KnowledgeSource_1a95slz" />
-    </authorityRequirement>
-    <authorityRequirement>
       <requiredAuthority href="#KnowledgeSource_1whctum" />
     </authorityRequirement>
-    <authorityRequirement>
-      <requiredAuthority href="#KnowledgeSource_180dmbb" />
-    </authorityRequirement>
     <decisionTable id="DecisionTable_07jlrzi">
-      <input id="InputClause_1dd4vgd" label="Desease">
+      <input id="InputClause_1dd4vgd" label="Conditions">
         <inputExpression id="LiteralExpression_1ue0hvm" typeRef="string">
-          <text>deasease_id</text>
+          <text>conditions</text>
         </inputExpression>
         <inputValues id="UnaryTests_090b2x2">
-          <text>"heart desease"</text>
+          <text>"Smoking","Diabetes","Hypertension","Heart Desease"</text>
         </inputValues>
       </input>
       <input id="InputClause_1eaa0i2" label="Age">
         <inputExpression id="LiteralExpression_02xea5f" typeRef="string">
-          <text></text>
+          <text>age</text>
         </inputExpression>
       </input>
-      <output id="OutputClause_1ees5ml" label="health condition" name="condition_id" typeRef="string" />
-      <rule id="DecisionRule_0tdeidi">
-        <description>Not good</description>
-        <inputEntry id="UnaryTests_0ffxz4l">
-          <text>"heart desease"</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_0ohkt4k">
-          <text></text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_1n247h3">
-          <text>bad</text>
-        </outputEntry>
-      </rule>
+      <output id="OutputClause_1ees5ml" label="Risk Group" name="risk_group" typeRef="string">
+        <outputValues id="UnaryTests_0aht810">
+          <text>"Green","Yellow","Red"</text>
+        </outputValues>
+      </output>
       <rule id="DecisionRule_0j0aog6">
+        <description>Fine</description>
         <inputEntry id="UnaryTests_0xyppsl">
           <text></text>
         </inputEntry>
         <inputEntry id="UnaryTests_0t0vvfk">
-          <text></text>
+          <text>&lt;=18</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_12h1mq4">
+          <text>"Green"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_16qnxfm">
+        <description>Fine</description>
+        <inputEntry id="UnaryTests_1mjmt1g">
           <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1hfmu3e">
+          <text>[18..30]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_191htdx">
+          <text>"Green"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1saggra">
+        <description>Fine</description>
+        <inputEntry id="UnaryTests_0o0drjq">
+          <text>"Smoking"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1y8d8hb">
+          <text>[18..30]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0mtnlkv">
+          <text>"Green"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1y3oepb">
+        <description>Fine</description>
+        <inputEntry id="UnaryTests_04ui29w">
+          <text>"Diabetes"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0zjsfef">
+          <text>[18..30]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0v5c0w2">
+          <text>"Green"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0entnsl">
+        <description>Fine</description>
+        <inputEntry id="UnaryTests_05psalf">
+          <text>"Hypertension"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ff267b">
+          <text>[18..30]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1shn2w8">
+          <text>"Green"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_08yrwt1">
+        <description>Critical</description>
+        <inputEntry id="UnaryTests_0xm44hj">
+          <text>"Heart Desease"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0e51uk5">
+          <text>[18..30]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0w8lzuk">
+          <text>"Red"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0fm7yhb">
+        <description>Fine</description>
+        <inputEntry id="UnaryTests_0q4ebtp">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ehtzyj">
+          <text>]50..80]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1fhrwkc">
+          <text>"Green"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_02kh3xd">
+        <description>Fine</description>
+        <inputEntry id="UnaryTests_12h6qfp">
+          <text>"Smoking"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1jjxsoc">
+          <text>]50..80]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0xtd3rd">
+          <text>"Green"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_01ffxod">
+        <description>To be monitored</description>
+        <inputEntry id="UnaryTests_1qnqorn">
+          <text>"Diabetes"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jq92s3">
+          <text>]50..80]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0va61bf">
+          <text>"Yellow"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1fv0aij">
+        <description>To be monitored</description>
+        <inputEntry id="UnaryTests_0cqkek3">
+          <text>"Hypertension"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0vy8032">
+          <text>]50..80]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_16vvgfe">
+          <text>"Yellow"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0iu576h">
+        <description>Critical</description>
+        <inputEntry id="UnaryTests_05sz62h">
+          <text>"Heart Desease"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1av24y1">
+          <text>]50..80]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1i5m639">
+          <text>"Red"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1yhok1g">
+        <description>Fine</description>
+        <inputEntry id="UnaryTests_009hj5p">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0hm4dgi">
+          <text>&gt;=80</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_04pmfqz">
+          <text>"Green"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0tdeidi">
+        <description>To be monitored</description>
+        <inputEntry id="UnaryTests_0ffxz4l">
+          <text>"Smoking"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ohkt4k">
+          <text>&gt;=80</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1n247h3">
+          <text>"Yellow"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0cwb1fy">
+        <description>Critical</description>
+        <inputEntry id="UnaryTests_1hefrrq">
+          <text>"Diabetes"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1nhp3zs">
+          <text>&gt;=80</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0szj622">
+          <text>"Red"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1k3my5d">
+        <description>Critical</description>
+        <inputEntry id="UnaryTests_1lbn2xn">
+          <text>"Hypertension"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1732hee">
+          <text>&gt;=80</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0dbexkv">
+          <text>"Red"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1vi2sb9">
+        <description>Critical</description>
+        <inputEntry id="UnaryTests_1g19eps">
+          <text>"Heart Desease"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1obf95h">
+          <text>&gt;=80</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1ijy5gd">
+          <text>"Red"</text>
         </outputEntry>
       </rule>
     </decisionTable>
@@ -204,7 +470,7 @@
   </inputData>
   <knowledgeSource id="KnowledgeSource_1otvp1y" name="Medical knowledge">
     <extensionElements>
-      <biodi:bounds x="316" y="419" width="100" height="63" />
+      <biodi:bounds x="141" y="383" width="100" height="63" />
     </extensionElements>
   </knowledgeSource>
   <businessKnowledgeModel id="BusinessKnowledgeModel_19p9967" name="Policy for health condition">
@@ -212,19 +478,9 @@
       <biodi:bounds x="685" y="175" width="135" height="46" />
     </extensionElements>
   </businessKnowledgeModel>
-  <knowledgeSource id="KnowledgeSource_1a95slz" name="Knowledge about corona virus">
-    <extensionElements>
-      <biodi:bounds x="221" y="349" width="100" height="63" />
-    </extensionElements>
-  </knowledgeSource>
   <knowledgeSource id="KnowledgeSource_1whctum" name="Health desease">
     <extensionElements>
       <biodi:bounds x="1032" y="342" width="100" height="63" />
-    </extensionElements>
-  </knowledgeSource>
-  <knowledgeSource id="KnowledgeSource_180dmbb" name="BMI">
-    <extensionElements>
-      <biodi:bounds x="926" y="274" width="100" height="63" />
     </extensionElements>
   </knowledgeSource>
   <inputData id="InputData_0klvst4" name="Overweight">
@@ -232,9 +488,9 @@
       <biodi:bounds x="306" y="649" width="125" height="45" />
     </extensionElements>
   </inputData>
-  <inputData id="InputData_1h4hjw5" name="Cancer">
+  <inputData id="InputData_1h4hjw5" name="Diabetes">
     <extensionElements>
-      <biodi:bounds x="442" y="615" width="125" height="45" />
+      <biodi:bounds x="449" y="616" width="125" height="45" />
     </extensionElements>
   </inputData>
   <inputData id="InputData_0vxu4j9" name="High blod preassure">
@@ -242,17 +498,12 @@
       <biodi:bounds x="554" y="554" width="125" height="45" />
     </extensionElements>
   </inputData>
-  <inputData id="InputData_1jzhzxj" name="Rauchen">
+  <inputData id="InputData_1d9c5ns" name="Deseases">
     <extensionElements>
-      <biodi:bounds x="687" y="598" width="125" height="45" />
+      <biodi:bounds x="737" y="585" width="125" height="45" />
     </extensionElements>
   </inputData>
-  <inputData id="InputData_1d9c5ns" name="Trinken">
-    <extensionElements>
-      <biodi:bounds x="775" y="534" width="125" height="45" />
-    </extensionElements>
-  </inputData>
-  <inputData id="InputData_17hxm46" name="Doing regular sport">
+  <inputData id="InputData_17hxm46" name="Smokes">
     <extensionElements>
       <biodi:bounds x="923" y="536" width="125" height="45" />
     </extensionElements>
@@ -260,16 +511,6 @@
   <inputData id="InputData_0bxsqr9" name="Age">
     <extensionElements>
       <biodi:bounds x="156" y="513" width="125" height="45" />
-    </extensionElements>
-  </inputData>
-  <inputData id="InputData_12bpov5" name="Takes medicmantation">
-    <extensionElements>
-      <biodi:bounds x="1038" y="492" width="125" height="45" />
-    </extensionElements>
-  </inputData>
-  <inputData id="InputData_1lr0czt" name="Gender">
-    <extensionElements>
-      <biodi:bounds x="1096" y="431" width="125" height="45" />
     </extensionElements>
   </inputData>
 </definitions>
