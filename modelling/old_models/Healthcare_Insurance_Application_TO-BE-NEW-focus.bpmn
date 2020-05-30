@@ -12,7 +12,7 @@
     <bpmn:group id="Group_0qi3tg9" categoryValueRef="CategoryValue_0ka6p5e" />
     <bpmn:group id="Group_0j6ai9x" categoryValueRef="CategoryValue_1nkbwxm" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_Insurance" isExecutable="false" camunda:candidateStarterGroups="engineer" camunda:versionTag="2.0">
+  <bpmn:process id="Process_Insurance" isExecutable="false" camunda:candidateStarterGroups="engineer" camunda:versionTag="2.1">
     <bpmn:laneSet id="LaneSet_02z0z8s">
       <bpmn:lane id="Lane_0s0l6ul" name="Consultant">
         <bpmn:flowNodeRef>Task_1w7w86i</bpmn:flowNodeRef>
@@ -188,7 +188,7 @@
     <bpmn:dataObjectReference id="DataObjectReference_1n2ve5v" name="Case Key" dataObjectRef="DataObject_06b848e" />
     <bpmn:dataObject id="DataObject_06b848e" />
   </bpmn:process>
-  <bpmn:process id="Process_Application1" name="Application-Test1" isExecutable="false" camunda:candidateStarterGroups="engineer" camunda:versionTag="2.0">
+  <bpmn:process id="Process_Application1" name="Application-Test1" isExecutable="false" camunda:candidateStarterGroups="engineer" camunda:versionTag="2.1">
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:extensionElements>
         <camunda:formData businessKey="businessKey">
