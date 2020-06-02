@@ -40,6 +40,16 @@
           <text>"accepted","alternative_offer","rejected"</text>
         </outputValues>
       </output>
+      <output id="OutputClause_1jbc196" label="insurance type output" name="insurance_type_output" typeRef="string">
+        <outputValues id="UnaryTests_05xauir">
+          <text>"Basic","Extended","Premium","Life"</text>
+        </outputValues>
+      </output>
+      <output id="OutputClause_1pot2wg" label="Risk Group output" name="risk_group_output" typeRef="string">
+        <outputValues id="UnaryTests_0bpz64k">
+          <text>"Green","Yellow","Red"</text>
+        </outputValues>
+      </output>
       <rule id="DecisionRule_0yupmqo">
         <inputEntry id="UnaryTests_0chvvks">
           <text>"Basic"</text>
@@ -49,6 +59,12 @@
         </inputEntry>
         <outputEntry id="LiteralExpression_1bjyouc">
           <text>"accepted"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1yzbrn2">
+          <text>"Basic"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_150jx5e">
+          <text>"Green"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0yubg8t">
@@ -61,6 +77,12 @@
         <outputEntry id="LiteralExpression_0wd7kob">
           <text>"accepted"</text>
         </outputEntry>
+        <outputEntry id="LiteralExpression_1pnt2vm">
+          <text>"Basic"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0d06ka8">
+          <text>"Yellow"</text>
+        </outputEntry>
       </rule>
       <rule id="DecisionRule_1c3zw7l">
         <inputEntry id="UnaryTests_18dvvqk">
@@ -71,6 +93,12 @@
         </inputEntry>
         <outputEntry id="LiteralExpression_0gwq8ta">
           <text>"rejected"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0wzjqdh">
+          <text>"Basic"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_15ub7le">
+          <text>"Red"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1sefi4w">
@@ -83,6 +111,12 @@
         <outputEntry id="LiteralExpression_0xmj6r3">
           <text>"accepted"</text>
         </outputEntry>
+        <outputEntry id="LiteralExpression_1hanj7n">
+          <text>"Extended"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0vm7m86">
+          <text>"Green"</text>
+        </outputEntry>
       </rule>
       <rule id="DecisionRule_0hukx2a">
         <inputEntry id="UnaryTests_0pk6k8q">
@@ -93,6 +127,12 @@
         </inputEntry>
         <outputEntry id="LiteralExpression_03ocbnd">
           <text>"alternative_offer"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0tjemw3">
+          <text>"Extended"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_02s8xqi">
+          <text>"Yellow"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_10jbkij">
@@ -105,6 +145,12 @@
         <outputEntry id="LiteralExpression_0y5gaxt">
           <text>"alternative_offer"</text>
         </outputEntry>
+        <outputEntry id="LiteralExpression_0a6cdcy">
+          <text>"Extended"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0cezwj8">
+          <text>"Red"</text>
+        </outputEntry>
       </rule>
       <rule id="DecisionRule_1v5ceqq">
         <inputEntry id="UnaryTests_1nehooc">
@@ -115,6 +161,12 @@
         </inputEntry>
         <outputEntry id="LiteralExpression_12qwcnr">
           <text>"accepted"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1yd3dq2">
+          <text>"Premium"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1c5z62s">
+          <text>"Green"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0ghm91a">
@@ -127,6 +179,12 @@
         <outputEntry id="LiteralExpression_1xmrqs0">
           <text>"alternative_offer"</text>
         </outputEntry>
+        <outputEntry id="LiteralExpression_05kjmqa">
+          <text>"Premium"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1s5fjsb">
+          <text>"Yellow"</text>
+        </outputEntry>
       </rule>
       <rule id="DecisionRule_0f6qkk6">
         <inputEntry id="UnaryTests_1cq6gz0">
@@ -137,6 +195,12 @@
         </inputEntry>
         <outputEntry id="LiteralExpression_0uumo6h">
           <text>"alternative_offer"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0dr6pm5">
+          <text>"Premium"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_025g215">
+          <text>"Red"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1fsr1de">
@@ -149,6 +213,12 @@
         <outputEntry id="LiteralExpression_1gnwhdw">
           <text>"accepted"</text>
         </outputEntry>
+        <outputEntry id="LiteralExpression_1e9dopk">
+          <text>"Life"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0tjkb1l">
+          <text>"Green"</text>
+        </outputEntry>
       </rule>
       <rule id="DecisionRule_153lul2">
         <inputEntry id="UnaryTests_1yfl687">
@@ -159,6 +229,12 @@
         </inputEntry>
         <outputEntry id="LiteralExpression_0o21lcu">
           <text>"rejected"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0sgh0zj">
+          <text>"Life"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0eue1gf">
+          <text>"Yellow"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1ci62ga">
@@ -171,6 +247,12 @@
         <outputEntry id="LiteralExpression_04expb7">
           <text>"rejected"</text>
         </outputEntry>
+        <outputEntry id="LiteralExpression_163yxdd">
+          <text>"Life"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0x3wso6">
+          <text>"Red"</text>
+        </outputEntry>
       </rule>
       <rule id="DecisionRule_1htfvro">
         <inputEntry id="UnaryTests_1fe3fro">
@@ -180,6 +262,12 @@
           <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1e4p71l">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0pb91po">
+          <text></text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1fji18w">
           <text></text>
         </outputEntry>
       </rule>
