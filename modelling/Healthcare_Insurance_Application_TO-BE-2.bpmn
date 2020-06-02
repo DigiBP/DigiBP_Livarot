@@ -10,7 +10,7 @@
     <bpmn:messageFlow id="MessageFlow_1l162h1a" sourceRef="Task_0p6n6t0a" targetRef="IntermediateThrowEvent_1wupwxka" />
     <bpmn:messageFlow id="MessageFlow_10hxa5la" sourceRef="Task_0rmevfza" targetRef="IntermediateThrowEvent_0fsftc1" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_Insurance-TO-BE-2" name="Employee_Process-TO-BE-2" isExecutable="true" camunda:candidateStarterGroups="engineer" camunda:versionTag="10.8">
+  <bpmn:process id="Process_Insurance-TO-BE-2" name="Employee_Process-TO-BE-2" isExecutable="true" camunda:candidateStarterGroups="engineer,employee,consultant" camunda:versionTag="10.9">
     <bpmn:laneSet id="LaneSet_02z0z8s">
       <bpmn:lane id="Lane_0s0l6ulaa" name="Consultant">
         <bpmn:flowNodeRef>StartEvent_10abg84a</bpmn:flowNodeRef>
@@ -51,10 +51,43 @@
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="insurance_type" label="Which insurance type would you recommend to the customer as alternative?" type="enum" defaultValue="${insurance_type}">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+            </camunda:validation>
             <camunda:value id="Basic" name="Basis-Versicherung" />
             <camunda:value id="Extended" name="Erweiterte-Versicherung" />
             <camunda:value id="Premium" name="Premium-Versicherung" />
             <camunda:value id="Life" name="Lebensversicherung" />
+          </camunda:formField>
+          <camunda:formField id="risk_group" label="Risk Group:" type="string">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="assesment_decision" label="The decision from the assessment:" type="string">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="age" label="The applicants age:" type="string">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="existing_conditions" label="The applicants exisiting conditions:" type="string">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="first_name" label="The applicants first name:" type="string">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="last_name" label="The applicants last name:" type="string">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
           </camunda:formField>
         </camunda:formData>
       </bpmn:extensionElements>
@@ -125,6 +158,7 @@
       <bpmn:extensionElements>
         <camunda:inputOutput>
           <camunda:outputParameter name="assesment_decision">${assesmentResult.assesment_decision}</camunda:outputParameter>
+          <camunda:outputParameter name="risk_group">${assesmentResult.risk_group}</camunda:outputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0do46z3</bpmn:incoming>
@@ -328,7 +362,7 @@ To Do: Raphael/Florian</bpmn:text>
     <bpmn:association id="Association_1l7jx1o" sourceRef="ServiceTask_1aeuz58" targetRef="TextAnnotation_0xb3qpy" />
     <bpmn:association id="Association_0eoda4w" sourceRef="Task_1ahua0naa" targetRef="TextAnnotation_0xb3qpy" />
   </bpmn:process>
-  <bpmn:process id="Process_Application-TO-BE-2" name="Applicant_Process-TO-BE-2" isExecutable="true" camunda:candidateStarterGroups="engineer" camunda:versionTag="10.8">
+  <bpmn:process id="Process_Application-TO-BE-2" name="Applicant_Process-TO-BE-2" isExecutable="true" camunda:candidateStarterGroups="engineer,customer,applicant" camunda:versionTag="10.9">
     <bpmn:startEvent id="StartEvent_1a">
       <bpmn:outgoing>SequenceFlow_1yh1aso</bpmn:outgoing>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_01ct0py">
