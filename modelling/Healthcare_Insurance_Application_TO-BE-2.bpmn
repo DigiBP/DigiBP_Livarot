@@ -347,16 +347,6 @@
     <bpmn:sequenceFlow id="SequenceFlow_10osr7sa" sourceRef="Task_1ahua0naa" targetRef="IntermediateThrowEvent_03szlj7" />
     <bpmn:sequenceFlow id="SequenceFlow_1de52o0a" sourceRef="Task_071br12a" targetRef="IntermediateCatchEvent_0rerfzs" />
     <bpmn:sequenceFlow id="SequenceFlow_0do46z3" sourceRef="IntermediateCatchEvent_0rerfzs" targetRef="Task_1tuo8kd" />
-    <bpmn:textAnnotation id="TextAnnotation_0x9biz2">
-      <bpmn:text>PDF-Generator + PDF via email verschicken
-To Do: Raphael/Florian</bpmn:text>
-    </bpmn:textAnnotation>
-    <bpmn:association id="Association_156fu3w" sourceRef="Task_1ahua0naa" targetRef="TextAnnotation_0x9biz2" />
-    <bpmn:textAnnotation id="TextAnnotation_0xb3qpy">
-      <bpmn:text>PDF verschicken</bpmn:text>
-    </bpmn:textAnnotation>
-    <bpmn:association id="Association_1l7jx1o" sourceRef="ServiceTask_1aeuz58" targetRef="TextAnnotation_0xb3qpy" />
-    <bpmn:association id="Association_0eoda4w" sourceRef="Task_1ahua0naa" targetRef="TextAnnotation_0xb3qpy" />
   </bpmn:process>
   <bpmn:process id="Process_Application-TO-BE-2" name="Applicant_Process-TO-BE-2" isExecutable="true" camunda:candidateStarterGroups="engineer,customer,applicant" camunda:versionTag="10.11">
     <bpmn:startEvent id="StartEvent_1a">
@@ -524,6 +514,10 @@ To Do: Raphael/Florian</bpmn:text>
               <camunda:script scriptFormat="JavaScript">out = JSON.stringify({
 	"email": email,
 	"step": "contract",
+       "firstName": first_name,
+       "lastName": last_name,
+       "conditions": existing_conditions,
+        "insuranceType": insurance_type,
 	"custom_text": ""
 });</camunda:script>
             </camunda:inputParameter>
@@ -633,13 +627,6 @@ To Do: Raphael/Florian</bpmn:text>
     <bpmn:textAnnotation id="TextAnnotation_0ctcbu6a">
       <bpmn:text>This process was created by the DigiBP_Livarot Spring 2020 Group</bpmn:text>
     </bpmn:textAnnotation>
-    <bpmn:textAnnotation id="TextAnnotation_04swczc">
-      <bpmn:text>Email with confirmation-links
-Mögliche Lösung:
-- Loop und sheet alle 2 minuten prüfen
-- Webhook-call zurück an Camunda
-To Do: Florian</bpmn:text>
-    </bpmn:textAnnotation>
     <bpmn:association id="Association_0flk5fqa" sourceRef="StartEvent_1a" targetRef="TextAnnotation_0ctcbu6a" />
     <bpmn:textAnnotation id="TextAnnotation_1vlllja">
       <bpmn:text>Wiki documentation:
@@ -660,8 +647,6 @@ In GDrive presentation (showing numbers)
 
 Goal: "We should pitch our solution, what is awesome and what kind of imporvements it will bring to the company. Show some small metrics/KPI's on how much it improves the customer experience, how much time you save for leads/new contracts and reduced employee-cost)</bpmn:text>
     </bpmn:textAnnotation>
-    <bpmn:association id="Association_02piacg" sourceRef="ServiceTask_1aeuz58" targetRef="TextAnnotation_0x9biz2" />
-    <bpmn:association id="Association_0it13xp" sourceRef="Task_1t4uybra" targetRef="TextAnnotation_04swczc" />
   </bpmn:process>
   <bpmn:message id="Message_1u5d9p9" name="Message_to_Consultant-Send_Application-2" />
   <bpmn:message id="Message_0en3pfi" name="Message_to_Customer-Statusupdate_1_Application-2" />
@@ -1075,20 +1060,6 @@ Goal: "We should pitch our solution, what is awesome and what kind of imporvemen
           <dc:Bounds x="2267" y="1082" width="88" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_0x9biz2_di" bpmnElement="TextAnnotation_0x9biz2">
-        <dc:Bounds x="1900" y="710" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Association_156fu3w_di" bpmnElement="Association_156fu3w">
-        <di:waypoint x="1837" y="1020" />
-        <di:waypoint x="1933" y="790" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="TextAnnotation_04swczc_di" bpmnElement="TextAnnotation_04swczc">
-        <dc:Bounds x="1250" y="260" width="319.98566126855604" height="79.6221322537112" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Association_0it13xp_di" bpmnElement="Association_0it13xp">
-        <di:waypoint x="1220" y="357" />
-        <di:waypoint x="1276" y="340" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ServiceTask_0wscczn_di" bpmnElement="ServiceTask_0wscczn" bioc:stroke="rgb(251, 140, 0)" bioc:fill="rgb(255, 224, 178)">
         <dc:Bounds x="1020" y="910" width="100" height="80" />
       </bpmndi:BPMNShape>
@@ -1139,13 +1110,6 @@ Goal: "We should pitch our solution, what is awesome and what kind of imporvemen
         <di:waypoint x="1790" y="500" />
         <di:waypoint x="1790" y="397" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="TextAnnotation_0xb3qpy_di" bpmnElement="TextAnnotation_0xb3qpy">
-        <dc:Bounds x="1780" y="730" width="100" height="40" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Association_1l7jx1o_di" bpmnElement="Association_1l7jx1o">
-        <di:waypoint x="1750" y="540" />
-        <di:waypoint x="1822" y="730" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ServiceTask_0imjd4f_di" bpmnElement="ServiceTask_0imjd4f" bioc:stroke="rgb(251, 140, 0)" bioc:fill="rgb(255, 224, 178)">
         <dc:Bounds x="1950" y="332" width="100" height="80" />
       </bpmndi:BPMNShape>
@@ -1192,14 +1156,6 @@ Goal: "We should pitch our solution, what is awesome and what kind of imporvemen
       <bpmndi:BPMNShape id="TextAnnotation_1vxhavw_di" bpmnElement="TextAnnotation_1vxhavw">
         <dc:Bounds x="2190" y="100" width="283" height="236" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Association_02piacg_di" bpmnElement="Association_02piacg">
-        <di:waypoint x="1764" y="540" />
-        <di:waypoint x="1906" y="710" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_0eoda4w_di" bpmnElement="Association_0eoda4w">
-        <di:waypoint x="1819" y="1020" />
-        <di:waypoint x="1811" y="770" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_13am8fw_di" bpmnElement="SequenceFlow_13am8fw">
         <di:waypoint x="1040" y="372" />
         <di:waypoint x="1120" y="372" />
