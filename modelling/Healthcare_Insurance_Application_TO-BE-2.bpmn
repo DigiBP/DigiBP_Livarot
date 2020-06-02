@@ -147,7 +147,7 @@
             </camunda:inputParameter>
             <camunda:inputParameter name="url">https://hook.integromat.com/tbjacx0lr8bmpz2ehjirifgxo0ylciy6</camunda:inputParameter>
             <camunda:inputParameter name="payload">
-              <camunda:script scriptFormat="JavaScript">out = JSON.stringify({"processId":execution.getBusinessKey(),"status":assesment_decision});</camunda:script>
+              <camunda:script scriptFormat="JavaScript">out = JSON.stringify({"processId":execution.getBusinessKey(),"status":assesment_decision,"description":"Application rejected","email":email});</camunda:script>
             </camunda:inputParameter>
           </camunda:inputOutput>
           <camunda:connectorId>http-connector</camunda:connectorId>
@@ -180,7 +180,7 @@
             </camunda:inputParameter>
             <camunda:inputParameter name="url">https://hook.integromat.com/tbjacx0lr8bmpz2ehjirifgxo0ylciy6</camunda:inputParameter>
             <camunda:inputParameter name="payload">
-              <camunda:script scriptFormat="JavaScript">out = JSON.stringify({"processId":execution.getBusinessKey(),"status":assesment_decision});</camunda:script>
+              <camunda:script scriptFormat="JavaScript">out = JSON.stringify({"processId":execution.getBusinessKey(),"status":assesment_decision,"description":"Initial application rejected - alternative offer will be created for you","email":email});</camunda:script>
             </camunda:inputParameter>
           </camunda:inputOutput>
           <camunda:connectorId>http-connector</camunda:connectorId>
@@ -201,7 +201,7 @@
             </camunda:inputParameter>
             <camunda:inputParameter name="url">https://hook.integromat.com/tbjacx0lr8bmpz2ehjirifgxo0ylciy6</camunda:inputParameter>
             <camunda:inputParameter name="payload">
-              <camunda:script scriptFormat="JavaScript">out = JSON.stringify({"processId":execution.getBusinessKey(),"status":assesment_decision});</camunda:script>
+              <camunda:script scriptFormat="JavaScript">out = JSON.stringify({"processId":execution.getBusinessKey(),"status":assesment_decision,"description":"Your application was accepted","email":email});</camunda:script>
             </camunda:inputParameter>
           </camunda:inputOutput>
           <camunda:connectorId>http-connector</camunda:connectorId>
@@ -257,7 +257,7 @@
             </camunda:inputParameter>
             <camunda:inputParameter name="url">https://hook.integromat.com/i1mc5vsyqcas1hraaemb1vo7uxad6a9o</camunda:inputParameter>
             <camunda:inputParameter name="payload">
-              <camunda:script scriptFormat="JavaScript">out = JSON.stringify({"processId":execution.getBusinessKey(),"status":"started"});</camunda:script>
+              <camunda:script scriptFormat="JavaScript">out = JSON.stringify({"processId":execution.getBusinessKey(),"status":"started","description":"Application received - we will soon begin with the assesment","email":email});</camunda:script>
             </camunda:inputParameter>
           </camunda:inputOutput>
           <camunda:connectorId>http-connector</camunda:connectorId>
@@ -315,18 +315,18 @@ To Do: Raphael/Florian</bpmn:text>
       <bpmn:text>Also output the risk group
 To Do: Raphael/Florian</bpmn:text>
     </bpmn:textAnnotation>
-    <bpmn:textAnnotation id="TextAnnotation_0bnofwe">
-      <bpmn:text>Add more condition + fix DMN Table
-To Do: Raphael</bpmn:text>
-    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0eyda9h" sourceRef="Task_0t7hdkxa" targetRef="TextAnnotation_15d9w0j" />
+    <bpmn:association id="Association_177uvtg" sourceRef="Task_1tuo8kd" targetRef="TextAnnotation_0es1h95" />
     <bpmn:textAnnotation id="TextAnnotation_0x9biz2">
       <bpmn:text>PDF-Generator + PDF via email verschicken
 To Do: Raphael/Florian</bpmn:text>
     </bpmn:textAnnotation>
-    <bpmn:association id="Association_0eyda9h" sourceRef="Task_0t7hdkxa" targetRef="TextAnnotation_15d9w0j" />
-    <bpmn:association id="Association_177uvtg" sourceRef="Task_1tuo8kd" targetRef="TextAnnotation_0es1h95" />
-    <bpmn:association id="Association_14iu0mg" sourceRef="Task_1tuo8kd" targetRef="TextAnnotation_0bnofwe" />
     <bpmn:association id="Association_156fu3w" sourceRef="Task_1ahua0naa" targetRef="TextAnnotation_0x9biz2" />
+    <bpmn:textAnnotation id="TextAnnotation_0xb3qpy">
+      <bpmn:text>PDF verschicken</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1l7jx1o" sourceRef="ServiceTask_1aeuz58" targetRef="TextAnnotation_0xb3qpy" />
+    <bpmn:association id="Association_0eoda4w" sourceRef="Task_1ahua0naa" targetRef="TextAnnotation_0xb3qpy" />
   </bpmn:process>
   <bpmn:process id="Process_Application-TO-BE-2" name="Applicant_Process-TO-BE-2" isExecutable="true" camunda:candidateStarterGroups="engineer" camunda:versionTag="10.8">
     <bpmn:startEvent id="StartEvent_1a">
@@ -595,10 +595,6 @@ To Do: Raphael/Florian</bpmn:text>
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${accept_alternative_offer == true}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_17w5uk0aa" sourceRef="ExclusiveGateway_0dev8fka" targetRef="IntermediateThrowEvent_1waafel" />
-    <bpmn:textAnnotation id="TextAnnotation_1vi8hap">
-      <bpmn:text>Chatbot-implementation "showing updates"
-To Do: Florian/Raphael</bpmn:text>
-    </bpmn:textAnnotation>
     <bpmn:textAnnotation id="TextAnnotation_0ctcbu6a">
       <bpmn:text>This process was created by the DigiBP_Livarot Spring 2020 Group</bpmn:text>
     </bpmn:textAnnotation>
@@ -609,16 +605,8 @@ Mögliche Lösung:
 - Webhook-call zurück an Camunda
 To Do: Florian</bpmn:text>
     </bpmn:textAnnotation>
-    <bpmn:textAnnotation id="TextAnnotation_0xb3qpy">
-      <bpmn:text>PDF verschicken</bpmn:text>
-    </bpmn:textAnnotation>
-    <bpmn:association id="Association_0daybso" sourceRef="ServiceTask_0oolvsr" targetRef="TextAnnotation_1vi8hap" />
-    <bpmn:association id="Association_1ia4zb1" sourceRef="ServiceTask_1wwzaj8" targetRef="TextAnnotation_1vi8hap" />
-    <bpmn:association id="Association_1w92eaf" sourceRef="ServiceTask_04m8kjf" targetRef="TextAnnotation_1vi8hap" />
-    <bpmn:association id="Association_075bsy7" sourceRef="ServiceTask_1nif9pb" targetRef="TextAnnotation_1vi8hap" />
     <bpmn:association id="Association_0flk5fqa" sourceRef="StartEvent_1a" targetRef="TextAnnotation_0ctcbu6a" />
     <bpmn:association id="Association_0it13xp" sourceRef="Task_1t4uybra" targetRef="TextAnnotation_04swczc" />
-    <bpmn:association id="Association_1l7jx1o" sourceRef="ServiceTask_1aeuz58" targetRef="TextAnnotation_0xb3qpy" />
     <bpmn:textAnnotation id="TextAnnotation_1vlllja">
       <bpmn:text>Wiki documentation:
 - Raphael TO-BE
@@ -638,6 +626,7 @@ In GDrive presentation (showing numbers)
 
 Goal: "We should pitch our solution, what is awesome and what kind of imporvements it will bring to the company. Show some small metrics/KPI's on how much it improves the customer experience, how much time you save for leads/new contracts and reduced employee-cost)</bpmn:text>
     </bpmn:textAnnotation>
+    <bpmn:association id="Association_02piacg" sourceRef="ServiceTask_1aeuz58" targetRef="TextAnnotation_0x9biz2" />
   </bpmn:process>
   <bpmn:message id="Message_1u5d9p9" name="Message_to_Consultant-Send_Application-2" />
   <bpmn:message id="Message_0en3pfi" name="Message_to_Customer-Statusupdate_1_Application-2" />
@@ -1052,11 +1041,11 @@ Goal: "We should pitch our solution, what is awesome and what kind of imporvemen
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_0x9biz2_di" bpmnElement="TextAnnotation_0x9biz2">
-        <dc:Bounds x="1900" y="1145" width="99.99156545209178" height="79.6221322537112" />
+        <dc:Bounds x="1900" y="710" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_156fu3w_di" bpmnElement="Association_156fu3w">
-        <di:waypoint x="1861" y="1100" />
-        <di:waypoint x="1909" y="1145" />
+        <di:waypoint x="1837" y="1020" />
+        <di:waypoint x="1933" y="790" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="TextAnnotation_04swczc_di" bpmnElement="TextAnnotation_04swczc">
         <dc:Bounds x="1250" y="260" width="319.98566126855604" height="79.6221322537112" />
@@ -1120,11 +1109,11 @@ Goal: "We should pitch our solution, what is awesome and what kind of imporvemen
         <di:waypoint x="1790" y="397" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="TextAnnotation_0xb3qpy_di" bpmnElement="TextAnnotation_0xb3qpy">
-        <dc:Bounds x="1640" y="400" width="100" height="40" />
+        <dc:Bounds x="1780" y="730" width="100" height="40" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_1l7jx1o_di" bpmnElement="Association_1l7jx1o">
-        <di:waypoint x="1710" y="460" />
-        <di:waypoint x="1700" y="440" />
+        <di:waypoint x="1750" y="540" />
+        <di:waypoint x="1822" y="730" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ServiceTask_0imjd4f_di" bpmnElement="ServiceTask_0imjd4f" bioc:stroke="rgb(251, 140, 0)" bioc:fill="rgb(255, 224, 178)">
         <dc:Bounds x="1950" y="332" width="100" height="80" />
@@ -1180,40 +1169,20 @@ Goal: "We should pitch our solution, what is awesome and what kind of imporvemen
         <di:waypoint x="765" y="910" />
         <di:waypoint x="799" y="856" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="TextAnnotation_0bnofwe_di" bpmnElement="TextAnnotation_0bnofwe">
-        <dc:Bounds x="650" y="790" width="99.99156545209178" height="66.12685560053981" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Association_14iu0mg_di" bpmnElement="Association_14iu0mg">
-        <di:waypoint x="727" y="910" />
-        <di:waypoint x="710" y="856" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="TextAnnotation_1vi8hap_di" bpmnElement="TextAnnotation_1vi8hap">
-        <dc:Bounds x="610" y="203" width="99.99156545209178" height="93.1174089068826" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Association_0daybso_di" bpmnElement="Association_0daybso">
-        <di:waypoint x="579" y="332" />
-        <di:waypoint x="615" y="296" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_1ia4zb1_di" bpmnElement="Association_1ia4zb1">
-        <di:waypoint x="940" y="252" />
-        <di:waypoint x="710" y="259" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_1w92eaf_di" bpmnElement="Association_1w92eaf">
-        <di:waypoint x="940" y="344" />
-        <di:waypoint x="860" y="300" />
-        <di:waypoint x="710" y="276" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_075bsy7_di" bpmnElement="Association_075bsy7">
-        <di:waypoint x="940" y="482" />
-        <di:waypoint x="800" y="430" />
-        <di:waypoint x="678" y="296" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="TextAnnotation_1vlllja_di" bpmnElement="TextAnnotation_1vlllja">
         <dc:Bounds x="187" y="90" width="243" height="107" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_1vxhavw_di" bpmnElement="TextAnnotation_1vxhavw">
         <dc:Bounds x="2190" y="100" width="283" height="236" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_02piacg_di" bpmnElement="Association_02piacg">
+        <di:waypoint x="1764" y="540" />
+        <di:waypoint x="1906" y="710" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0eoda4w_di" bpmnElement="Association_0eoda4w">
+        <di:waypoint x="1819" y="1020" />
+        <di:waypoint x="1811" y="770" />
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
