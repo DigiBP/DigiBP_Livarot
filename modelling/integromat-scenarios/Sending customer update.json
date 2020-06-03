@@ -104,22 +104,22 @@
                                 ]
                             },
                             "mapper": {
-                                "cc": [],
                                 "to": [
                                     "{{2.email}}"
                                 ],
-                                "bcc": [],
-                                "from": "",
-                                "html": "Hi,\n<br><br>\nYour application got accepted!<br>\nSoon you will receive the contract.<br>\n<br><br>\nTo ensure full transparency you can always check the status here: <a href=\"https://console.actions.google.com/project/insurance-application-asses-gy/simulator\">Ask our chatbot [Login required]</a>\n<br><br>\nBest regards,\n<br>\nIMMORTAL Insurance Inc.",
-                                "sender": "",
-                                "headers": [],
-                                "replyTo": "",
                                 "subject": "Congratulations!",
-                                "priority": "normal",
+                                "contentType": "html",
+                                "attachments": [],
+                                "cc": [],
+                                "bcc": [],
+                                "sender": "",
+                                "replyTo": "",
                                 "inReplyTo": "",
                                 "references": [],
-                                "attachments": [],
-                                "contentType": "html"
+                                "priority": "normal",
+                                "headers": [],
+                                "from": "",
+                                "html": "Hi,\n<br><br>\nYour application got accepted!<br>\nSoon you will receive the contract.<br>\n<br><br>\nTo ensure full transparency you can always check the status here: <a href=\"https://bot.dialogflow.com/b7ea2271-cda2-46a2-adee-b67ec078b566\">Ask our chatbot</a>\n<br><br>\nBest regards,\n<br>\nIMMORTAL Insurance Inc."
                             },
                             "metadata": {
                                 "designer": {
@@ -127,9 +127,11 @@
                                     "y": -299
                                 },
                                 "restore": {
-                                    "cc": {
-                                        "mode": "chose",
-                                        "items": []
+                                    "account": {
+                                        "label": "My Google connection (florian.rueegg@houzy.ch)"
+                                    },
+                                    "saveAfterSent": {
+                                        "label": "No"
                                     },
                                     "to": {
                                         "mode": "chose",
@@ -137,45 +139,43 @@
                                             "undefined"
                                         ]
                                     },
-                                    "bcc": {
-                                        "mode": "chose",
-                                        "items": []
-                                    },
-                                    "account": {
-                                        "label": "My Google connection (florian.rueegg@houzy.ch)"
-                                    },
-                                    "headers": {
-                                        "items": []
-                                    },
-                                    "priority": {
-                                        "label": "Normal"
-                                    },
-                                    "references": {
-                                        "mode": "chose",
-                                        "items": []
+                                    "contentType": {
+                                        "label": "HTML"
                                     },
                                     "attachments": {
                                         "mode": "chose",
                                         "items": []
                                     },
-                                    "contentType": {
-                                        "label": "HTML"
+                                    "cc": {
+                                        "mode": "chose",
+                                        "items": []
                                     },
-                                    "saveAfterSent": {
-                                        "label": "No"
+                                    "bcc": {
+                                        "mode": "chose",
+                                        "items": []
+                                    },
+                                    "references": {
+                                        "mode": "chose",
+                                        "items": []
+                                    },
+                                    "priority": {
+                                        "label": "Normal"
+                                    },
+                                    "headers": {
+                                        "items": []
                                     }
                                 },
                                 "parameters": [
                                     {
                                         "name": "account",
-                                        "type": "account",
                                         "label": "Connection",
+                                        "type": "account",
                                         "required": true
                                     },
                                     {
                                         "name": "saveAfterSent",
-                                        "type": "select",
                                         "label": "Save message after sending",
+                                        "type": "select",
                                         "required": true,
                                         "validate": {
                                             "enum": [
@@ -188,29 +188,29 @@
                                 "expect": [
                                     {
                                         "name": "to",
+                                        "label": "To",
+                                        "type": "array",
+                                        "required": true,
+                                        "labels": {
+                                            "add": "Add a recipient",
+                                            "edit": "Edit a recipient"
+                                        },
                                         "spec": {
                                             "name": "email",
                                             "type": "email",
                                             "label": "Email address",
                                             "required": true
-                                        },
-                                        "type": "array",
-                                        "label": "To",
-                                        "labels": {
-                                            "add": "Add a recipient",
-                                            "edit": "Edit a recipient"
-                                        },
-                                        "required": true
+                                        }
                                     },
                                     {
                                         "name": "subject",
-                                        "type": "text",
-                                        "label": "Subject"
+                                        "label": "Subject",
+                                        "type": "text"
                                     },
                                     {
                                         "name": "contentType",
-                                        "type": "select",
                                         "label": "Content Type",
+                                        "type": "select",
                                         "required": true,
                                         "validate": {
                                             "enum": [
@@ -221,29 +221,29 @@
                                     },
                                     {
                                         "name": "attachments",
+                                        "label": "Attachments",
+                                        "type": "array",
                                         "spec": [
                                             {
                                                 "name": "fileName",
-                                                "type": "filename",
                                                 "label": "File name",
+                                                "type": "filename",
                                                 "required": true,
                                                 "semantic": "file:name"
                                             },
                                             {
                                                 "name": "data",
-                                                "type": "buffer",
                                                 "label": "Data",
+                                                "type": "buffer",
                                                 "required": true,
                                                 "semantic": "file:data"
                                             },
                                             {
                                                 "name": "cid",
-                                                "type": "text",
-                                                "label": "Content-ID"
+                                                "label": "Content-ID",
+                                                "type": "text"
                                             }
                                         ],
-                                        "type": "array",
-                                        "label": "Attachments",
                                         "labels": {
                                             "add": "Add an attachment",
                                             "edit": "Edit an attachment"
@@ -251,61 +251,61 @@
                                     },
                                     {
                                         "name": "cc",
+                                        "label": "Copy recipient",
+                                        "type": "array",
+                                        "labels": {
+                                            "add": "Add a copy recipient",
+                                            "edit": "Edit a copy recipient"
+                                        },
                                         "spec": {
                                             "name": "email",
                                             "type": "email",
                                             "label": "Email address"
-                                        },
-                                        "type": "array",
-                                        "label": "Copy recipient",
-                                        "labels": {
-                                            "add": "Add a copy recipient",
-                                            "edit": "Edit a copy recipient"
                                         }
                                     },
                                     {
                                         "name": "bcc",
+                                        "label": "Blind copy recipient",
+                                        "type": "array",
+                                        "labels": {
+                                            "add": "Add a blind copy recipient",
+                                            "edit": "Edit a blind copy recipient"
+                                        },
                                         "spec": {
                                             "name": "email",
                                             "type": "email",
                                             "label": "Email address"
-                                        },
-                                        "type": "array",
-                                        "label": "Blind copy recipient",
-                                        "labels": {
-                                            "add": "Add a blind copy recipient",
-                                            "edit": "Edit a blind copy recipient"
                                         }
                                     },
                                     {
                                         "name": "sender",
-                                        "type": "email",
-                                        "label": "Sender"
+                                        "label": "Sender",
+                                        "type": "email"
                                     },
                                     {
                                         "name": "replyTo",
-                                        "type": "text",
-                                        "label": "Reply-To"
+                                        "label": "Reply-To",
+                                        "type": "text"
                                     },
                                     {
                                         "name": "inReplyTo",
-                                        "type": "text",
-                                        "label": "In-Reply-To"
+                                        "label": "In-Reply-To",
+                                        "type": "text"
                                     },
                                     {
                                         "name": "references",
+                                        "label": "References",
+                                        "type": "array",
                                         "spec": {
                                             "type": "text",
                                             "label": "Reference",
                                             "required": true
-                                        },
-                                        "type": "array",
-                                        "label": "References"
+                                        }
                                     },
                                     {
                                         "name": "priority",
-                                        "type": "select",
                                         "label": "Priority",
+                                        "type": "select",
                                         "validate": {
                                             "enum": [
                                                 "high",
@@ -316,32 +316,32 @@
                                     },
                                     {
                                         "name": "headers",
+                                        "label": "Headers",
+                                        "type": "array",
                                         "spec": [
                                             {
                                                 "name": "key",
-                                                "type": "text",
                                                 "label": "Key",
+                                                "type": "text",
                                                 "required": true
                                             },
                                             {
                                                 "name": "value",
-                                                "type": "text",
                                                 "label": "Value",
+                                                "type": "text",
                                                 "required": true
                                             }
-                                        ],
-                                        "type": "array",
-                                        "label": "Headers"
+                                        ]
                                     },
                                     {
                                         "name": "from",
-                                        "type": "text",
-                                        "label": "From"
+                                        "label": "From",
+                                        "type": "text"
                                     },
                                     {
                                         "name": "html",
-                                        "type": "text",
-                                        "label": "Content"
+                                        "label": "Content",
+                                        "type": "text"
                                     }
                                 ]
                             }
@@ -973,22 +973,22 @@
                                 "saveAfterSent": false
                             },
                             "mapper": {
-                                "cc": [],
                                 "to": [
                                     "{{2.email}}"
                                 ],
-                                "bcc": [],
-                                "from": "",
-                                "html": "Hi,<br><br>\nYour application got rejected but we can offer you the following alternative: <b>{{2.insuranceType}}</b> <br>\n<br><br>\nDo you want to accept it or not?<br>\n<a href=https://hook.integromat.com/xy5uqs1xe6g5ky6m5f4unzr7m3hawldu?taskId={{10.id}}&accept=true>Accept offer</a> <br><br>\n<a href=https://hook.integromat.com/xy5uqs1xe6g5ky6m5f4unzr7m3hawldu?taskId={{10.id}}&accept=false>Deny offer</a>\n<br><br>\nTo ensure full transparency you can always check the status here:<a href=\"https://console.actions.google.com/project/insurance-application-asses-gy/simulator\">Ask our chatbot [Login required]</a>\n<br><br>\nBest regards,\n<br>\nIMMORTAL Insurance Inc.",
-                                "sender": "",
-                                "headers": [],
-                                "replyTo": "",
                                 "subject": "Don't worry!",
-                                "priority": "normal",
+                                "contentType": "html",
+                                "attachments": [],
+                                "cc": [],
+                                "bcc": [],
+                                "sender": "",
+                                "replyTo": "",
                                 "inReplyTo": "",
                                 "references": [],
-                                "attachments": [],
-                                "contentType": "html"
+                                "priority": "normal",
+                                "headers": [],
+                                "from": "",
+                                "html": "Hi,<br><br>\nYour application got rejected but we can offer you the following alternative: <b>{{2.insuranceType}}</b> <br>\n<br><br>\nDo you want to accept it or not?<br>\n<a href=https://hook.integromat.com/xy5uqs1xe6g5ky6m5f4unzr7m3hawldu?taskId={{10.id}}&accept=true>Accept offer</a> <br><br>\n<a href=https://hook.integromat.com/xy5uqs1xe6g5ky6m5f4unzr7m3hawldu?taskId={{10.id}}&accept=false>Deny offer</a>\n<br><br>\nTo ensure full transparency you can always check the status here:<a href=\"https://bot.dialogflow.com/b7ea2271-cda2-46a2-adee-b67ec078b566\">Ask our chatbot</a>\n<br><br>\nBest regards,\n<br>\nIMMORTAL Insurance Inc."
                             },
                             "metadata": {
                                 "designer": {
@@ -996,9 +996,11 @@
                                     "y": 173
                                 },
                                 "restore": {
-                                    "cc": {
-                                        "mode": "chose",
-                                        "items": []
+                                    "account": {
+                                        "label": "My Google connection (florian.rueegg@houzy.ch)"
+                                    },
+                                    "saveAfterSent": {
+                                        "label": "No"
                                     },
                                     "to": {
                                         "mode": "chose",
@@ -1006,45 +1008,43 @@
                                             "undefined"
                                         ]
                                     },
-                                    "bcc": {
-                                        "mode": "chose",
-                                        "items": []
-                                    },
-                                    "account": {
-                                        "label": "My Google connection (florian.rueegg@houzy.ch)"
-                                    },
-                                    "headers": {
-                                        "items": []
-                                    },
-                                    "priority": {
-                                        "label": "Normal"
-                                    },
-                                    "references": {
-                                        "mode": "chose",
-                                        "items": []
+                                    "contentType": {
+                                        "label": "HTML"
                                     },
                                     "attachments": {
                                         "mode": "chose",
                                         "items": []
                                     },
-                                    "contentType": {
-                                        "label": "HTML"
+                                    "cc": {
+                                        "mode": "chose",
+                                        "items": []
                                     },
-                                    "saveAfterSent": {
-                                        "label": "No"
+                                    "bcc": {
+                                        "mode": "chose",
+                                        "items": []
+                                    },
+                                    "references": {
+                                        "mode": "chose",
+                                        "items": []
+                                    },
+                                    "priority": {
+                                        "label": "Normal"
+                                    },
+                                    "headers": {
+                                        "items": []
                                     }
                                 },
                                 "parameters": [
                                     {
                                         "name": "account",
-                                        "type": "account",
                                         "label": "Connection",
+                                        "type": "account",
                                         "required": true
                                     },
                                     {
                                         "name": "saveAfterSent",
-                                        "type": "select",
                                         "label": "Save message after sending",
+                                        "type": "select",
                                         "required": true,
                                         "validate": {
                                             "enum": [
@@ -1057,29 +1057,29 @@
                                 "expect": [
                                     {
                                         "name": "to",
+                                        "label": "To",
+                                        "type": "array",
+                                        "required": true,
+                                        "labels": {
+                                            "add": "Add a recipient",
+                                            "edit": "Edit a recipient"
+                                        },
                                         "spec": {
                                             "name": "email",
                                             "type": "email",
                                             "label": "Email address",
                                             "required": true
-                                        },
-                                        "type": "array",
-                                        "label": "To",
-                                        "labels": {
-                                            "add": "Add a recipient",
-                                            "edit": "Edit a recipient"
-                                        },
-                                        "required": true
+                                        }
                                     },
                                     {
                                         "name": "subject",
-                                        "type": "text",
-                                        "label": "Subject"
+                                        "label": "Subject",
+                                        "type": "text"
                                     },
                                     {
                                         "name": "contentType",
-                                        "type": "select",
                                         "label": "Content Type",
+                                        "type": "select",
                                         "required": true,
                                         "validate": {
                                             "enum": [
@@ -1090,29 +1090,29 @@
                                     },
                                     {
                                         "name": "attachments",
+                                        "label": "Attachments",
+                                        "type": "array",
                                         "spec": [
                                             {
                                                 "name": "fileName",
-                                                "type": "filename",
                                                 "label": "File name",
+                                                "type": "filename",
                                                 "required": true,
                                                 "semantic": "file:name"
                                             },
                                             {
                                                 "name": "data",
-                                                "type": "buffer",
                                                 "label": "Data",
+                                                "type": "buffer",
                                                 "required": true,
                                                 "semantic": "file:data"
                                             },
                                             {
                                                 "name": "cid",
-                                                "type": "text",
-                                                "label": "Content-ID"
+                                                "label": "Content-ID",
+                                                "type": "text"
                                             }
                                         ],
-                                        "type": "array",
-                                        "label": "Attachments",
                                         "labels": {
                                             "add": "Add an attachment",
                                             "edit": "Edit an attachment"
@@ -1120,61 +1120,61 @@
                                     },
                                     {
                                         "name": "cc",
+                                        "label": "Copy recipient",
+                                        "type": "array",
+                                        "labels": {
+                                            "add": "Add a copy recipient",
+                                            "edit": "Edit a copy recipient"
+                                        },
                                         "spec": {
                                             "name": "email",
                                             "type": "email",
                                             "label": "Email address"
-                                        },
-                                        "type": "array",
-                                        "label": "Copy recipient",
-                                        "labels": {
-                                            "add": "Add a copy recipient",
-                                            "edit": "Edit a copy recipient"
                                         }
                                     },
                                     {
                                         "name": "bcc",
+                                        "label": "Blind copy recipient",
+                                        "type": "array",
+                                        "labels": {
+                                            "add": "Add a blind copy recipient",
+                                            "edit": "Edit a blind copy recipient"
+                                        },
                                         "spec": {
                                             "name": "email",
                                             "type": "email",
                                             "label": "Email address"
-                                        },
-                                        "type": "array",
-                                        "label": "Blind copy recipient",
-                                        "labels": {
-                                            "add": "Add a blind copy recipient",
-                                            "edit": "Edit a blind copy recipient"
                                         }
                                     },
                                     {
                                         "name": "sender",
-                                        "type": "email",
-                                        "label": "Sender"
+                                        "label": "Sender",
+                                        "type": "email"
                                     },
                                     {
                                         "name": "replyTo",
-                                        "type": "text",
-                                        "label": "Reply-To"
+                                        "label": "Reply-To",
+                                        "type": "text"
                                     },
                                     {
                                         "name": "inReplyTo",
-                                        "type": "text",
-                                        "label": "In-Reply-To"
+                                        "label": "In-Reply-To",
+                                        "type": "text"
                                     },
                                     {
                                         "name": "references",
+                                        "label": "References",
+                                        "type": "array",
                                         "spec": {
                                             "type": "text",
                                             "label": "Reference",
                                             "required": true
-                                        },
-                                        "type": "array",
-                                        "label": "References"
+                                        }
                                     },
                                     {
                                         "name": "priority",
-                                        "type": "select",
                                         "label": "Priority",
+                                        "type": "select",
                                         "validate": {
                                             "enum": [
                                                 "high",
@@ -1185,32 +1185,32 @@
                                     },
                                     {
                                         "name": "headers",
+                                        "label": "Headers",
+                                        "type": "array",
                                         "spec": [
                                             {
                                                 "name": "key",
-                                                "type": "text",
                                                 "label": "Key",
+                                                "type": "text",
                                                 "required": true
                                             },
                                             {
                                                 "name": "value",
-                                                "type": "text",
                                                 "label": "Value",
+                                                "type": "text",
                                                 "required": true
                                             }
-                                        ],
-                                        "type": "array",
-                                        "label": "Headers"
+                                        ]
                                     },
                                     {
                                         "name": "from",
-                                        "type": "text",
-                                        "label": "From"
+                                        "label": "From",
+                                        "type": "text"
                                     },
                                     {
                                         "name": "html",
-                                        "type": "text",
-                                        "label": "Content"
+                                        "label": "Content",
+                                        "type": "text"
                                     }
                                 ]
                             }
@@ -1240,22 +1240,22 @@
                                 ]
                             },
                             "mapper": {
-                                "cc": [],
                                 "to": [
                                     "{{2.email}}"
                                 ],
-                                "bcc": [],
-                                "from": "IMMORTAL Insurance Inc.",
-                                "html": "Hi,\n<br><br>\nWe successfully received your application and started working on it!\n<br><br>\nTo ensure full transparency you can always check the status here: <a href=\"https://console.actions.google.com/project/insurance-application-asses-gy/simulator\">Ask our chatbot [Login required]</a>\n<br><br>\nBest regards,\n<br>\nIMMORTAL Insurance Inc.",
-                                "sender": "",
-                                "headers": [],
-                                "replyTo": "",
                                 "subject": "We received your application!",
-                                "priority": "normal",
+                                "contentType": "html",
+                                "attachments": [],
+                                "cc": [],
+                                "bcc": [],
+                                "sender": "",
+                                "replyTo": "",
                                 "inReplyTo": "",
                                 "references": [],
-                                "attachments": [],
-                                "contentType": "html"
+                                "priority": "normal",
+                                "headers": [],
+                                "from": "IMMORTAL Insurance Inc.",
+                                "html": "Hi,\n<br><br>\nWe successfully received your application and started working on it!\n<br><br>\nTo ensure full transparency you can always check the status here: <a href=\"https://bot.dialogflow.com/b7ea2271-cda2-46a2-adee-b67ec078b566\">Ask our chatbot</a>\n<br><br>\nBest regards,\n<br>\nIMMORTAL Insurance Inc."
                             },
                             "metadata": {
                                 "designer": {
@@ -1263,9 +1263,11 @@
                                     "y": -377
                                 },
                                 "restore": {
-                                    "cc": {
-                                        "mode": "chose",
-                                        "items": []
+                                    "account": {
+                                        "label": "My Google connection (florian.rueegg@houzy.ch)"
+                                    },
+                                    "saveAfterSent": {
+                                        "label": "No"
                                     },
                                     "to": {
                                         "mode": "chose",
@@ -1273,45 +1275,43 @@
                                             "undefined"
                                         ]
                                     },
-                                    "bcc": {
-                                        "mode": "chose",
-                                        "items": []
-                                    },
-                                    "account": {
-                                        "label": "My Google connection (florian.rueegg@houzy.ch)"
-                                    },
-                                    "headers": {
-                                        "items": []
-                                    },
-                                    "priority": {
-                                        "label": "Normal"
-                                    },
-                                    "references": {
-                                        "mode": "chose",
-                                        "items": []
+                                    "contentType": {
+                                        "label": "HTML"
                                     },
                                     "attachments": {
                                         "mode": "chose",
                                         "items": []
                                     },
-                                    "contentType": {
-                                        "label": "HTML"
+                                    "cc": {
+                                        "mode": "chose",
+                                        "items": []
                                     },
-                                    "saveAfterSent": {
-                                        "label": "No"
+                                    "bcc": {
+                                        "mode": "chose",
+                                        "items": []
+                                    },
+                                    "references": {
+                                        "mode": "chose",
+                                        "items": []
+                                    },
+                                    "priority": {
+                                        "label": "Normal"
+                                    },
+                                    "headers": {
+                                        "items": []
                                     }
                                 },
                                 "parameters": [
                                     {
                                         "name": "account",
-                                        "type": "account",
                                         "label": "Connection",
+                                        "type": "account",
                                         "required": true
                                     },
                                     {
                                         "name": "saveAfterSent",
-                                        "type": "select",
                                         "label": "Save message after sending",
+                                        "type": "select",
                                         "required": true,
                                         "validate": {
                                             "enum": [
@@ -1324,29 +1324,29 @@
                                 "expect": [
                                     {
                                         "name": "to",
+                                        "label": "To",
+                                        "type": "array",
+                                        "required": true,
+                                        "labels": {
+                                            "add": "Add a recipient",
+                                            "edit": "Edit a recipient"
+                                        },
                                         "spec": {
                                             "name": "email",
                                             "type": "email",
                                             "label": "Email address",
                                             "required": true
-                                        },
-                                        "type": "array",
-                                        "label": "To",
-                                        "labels": {
-                                            "add": "Add a recipient",
-                                            "edit": "Edit a recipient"
-                                        },
-                                        "required": true
+                                        }
                                     },
                                     {
                                         "name": "subject",
-                                        "type": "text",
-                                        "label": "Subject"
+                                        "label": "Subject",
+                                        "type": "text"
                                     },
                                     {
                                         "name": "contentType",
-                                        "type": "select",
                                         "label": "Content Type",
+                                        "type": "select",
                                         "required": true,
                                         "validate": {
                                             "enum": [
@@ -1357,29 +1357,29 @@
                                     },
                                     {
                                         "name": "attachments",
+                                        "label": "Attachments",
+                                        "type": "array",
                                         "spec": [
                                             {
                                                 "name": "fileName",
-                                                "type": "filename",
                                                 "label": "File name",
+                                                "type": "filename",
                                                 "required": true,
                                                 "semantic": "file:name"
                                             },
                                             {
                                                 "name": "data",
-                                                "type": "buffer",
                                                 "label": "Data",
+                                                "type": "buffer",
                                                 "required": true,
                                                 "semantic": "file:data"
                                             },
                                             {
                                                 "name": "cid",
-                                                "type": "text",
-                                                "label": "Content-ID"
+                                                "label": "Content-ID",
+                                                "type": "text"
                                             }
                                         ],
-                                        "type": "array",
-                                        "label": "Attachments",
                                         "labels": {
                                             "add": "Add an attachment",
                                             "edit": "Edit an attachment"
@@ -1387,61 +1387,61 @@
                                     },
                                     {
                                         "name": "cc",
+                                        "label": "Copy recipient",
+                                        "type": "array",
+                                        "labels": {
+                                            "add": "Add a copy recipient",
+                                            "edit": "Edit a copy recipient"
+                                        },
                                         "spec": {
                                             "name": "email",
                                             "type": "email",
                                             "label": "Email address"
-                                        },
-                                        "type": "array",
-                                        "label": "Copy recipient",
-                                        "labels": {
-                                            "add": "Add a copy recipient",
-                                            "edit": "Edit a copy recipient"
                                         }
                                     },
                                     {
                                         "name": "bcc",
+                                        "label": "Blind copy recipient",
+                                        "type": "array",
+                                        "labels": {
+                                            "add": "Add a blind copy recipient",
+                                            "edit": "Edit a blind copy recipient"
+                                        },
                                         "spec": {
                                             "name": "email",
                                             "type": "email",
                                             "label": "Email address"
-                                        },
-                                        "type": "array",
-                                        "label": "Blind copy recipient",
-                                        "labels": {
-                                            "add": "Add a blind copy recipient",
-                                            "edit": "Edit a blind copy recipient"
                                         }
                                     },
                                     {
                                         "name": "sender",
-                                        "type": "email",
-                                        "label": "Sender"
+                                        "label": "Sender",
+                                        "type": "email"
                                     },
                                     {
                                         "name": "replyTo",
-                                        "type": "text",
-                                        "label": "Reply-To"
+                                        "label": "Reply-To",
+                                        "type": "text"
                                     },
                                     {
                                         "name": "inReplyTo",
-                                        "type": "text",
-                                        "label": "In-Reply-To"
+                                        "label": "In-Reply-To",
+                                        "type": "text"
                                     },
                                     {
                                         "name": "references",
+                                        "label": "References",
+                                        "type": "array",
                                         "spec": {
                                             "type": "text",
                                             "label": "Reference",
                                             "required": true
-                                        },
-                                        "type": "array",
-                                        "label": "References"
+                                        }
                                     },
                                     {
                                         "name": "priority",
-                                        "type": "select",
                                         "label": "Priority",
+                                        "type": "select",
                                         "validate": {
                                             "enum": [
                                                 "high",
@@ -1452,32 +1452,32 @@
                                     },
                                     {
                                         "name": "headers",
+                                        "label": "Headers",
+                                        "type": "array",
                                         "spec": [
                                             {
                                                 "name": "key",
-                                                "type": "text",
                                                 "label": "Key",
+                                                "type": "text",
                                                 "required": true
                                             },
                                             {
                                                 "name": "value",
-                                                "type": "text",
                                                 "label": "Value",
+                                                "type": "text",
                                                 "required": true
                                             }
-                                        ],
-                                        "type": "array",
-                                        "label": "Headers"
+                                        ]
                                     },
                                     {
                                         "name": "from",
-                                        "type": "text",
-                                        "label": "From"
+                                        "label": "From",
+                                        "type": "text"
                                     },
                                     {
                                         "name": "html",
-                                        "type": "text",
-                                        "label": "Content"
+                                        "label": "Content",
+                                        "type": "text"
                                     }
                                 ],
                                 "advanced": true
