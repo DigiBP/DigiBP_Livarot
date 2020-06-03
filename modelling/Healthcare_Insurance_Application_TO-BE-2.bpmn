@@ -307,7 +307,7 @@
     <bpmn:endEvent id="EndEvent_135ck5va">
       <bpmn:incoming>SequenceFlow_01cph0t</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sendTask id="Task_0rmevfza" name="Contract send to customer" camunda:expression="${runtimeService.createMessageCorrelation(&#34;Message_to_Customer-Contractual_papers-send-2&#34;).processInstanceBusinessKey(execution.getBusinessKey()).setVariables(execution.getVariables()).correlate()}">
+    <bpmn:sendTask id="Task_0rmevfza" name="Contract sent&#10;to customer" camunda:expression="${runtimeService.createMessageCorrelation(&#34;Message_to_Customer-Contractual_papers-send-2&#34;).processInstanceBusinessKey(execution.getBusinessKey()).setVariables(execution.getVariables()).correlate()}">
       <bpmn:incoming>SequenceFlow_0v69mbx</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1g4flb8a</bpmn:outgoing>
     </bpmn:sendTask>
